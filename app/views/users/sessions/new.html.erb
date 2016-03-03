@@ -1,7 +1,6 @@
 <div class="wrapper">
   <%= bootstrap_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <h3 class="form-signin-heading">Login</h3>
-    <hr class="colorgraph"><br>
     <%= f.email_field :email, autofocus: true %>
     <%= f.password_field :password, autocomplete: "off" %>
     <% if devise_mapping.rememberable? -%>
@@ -9,8 +8,9 @@
     <% end -%>
 
     <div class="actions">
-      <%= f.submit "Log in" %>
+      <%= f.submit "Log in", class: "btn-lg btn-primary btn-block"%>
     </div>
+    <br/>
     <%= render "users/shared/links" %>
   <% end %>
 </div>

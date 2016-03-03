@@ -11,19 +11,19 @@
  * It is generally better to create a new file per style scope.
  *
  */
- // Example using 'Cerulean' bootswatch
+ //Using 'Flatly' bootswatch
 
 //Import bootstrap-sprockets
 @import "bootstrap-sprockets";
 
 // Import cerulean variables
-@import "bootswatch/cerulean/variables";
+@import "bootswatch/flatly/variables";
 
 // Then bootstrap itself
 @import "bootstrap";
 
 // And finally bootswatch style itself
-@import "bootswatch/cerulean/bootswatch";
+@import "bootswatch/flatly/bootswatch";
 
 // First set or import your overrides
 // $textColor: #000;
