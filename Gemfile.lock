@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/bootstrap-ruby/rails-bootstrap-forms.git
+  revision: 941edb9535f4cc38f175368439453294618bd501
+  specs:
+    bootstrap_form (2.3.0)
+
+GIT
   remote: git://github.com/plataformatec/devise.git
   revision: 342304375946ca11608516eae80f78dbaae059d5
   specs:
@@ -183,6 +189,7 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-datepicker-rails
   bootstrap-sass (~> 3.3.6)
+  bootstrap_form!
   bootswatch-rails
   byebug
   coffee-rails (~> 4.1.0)

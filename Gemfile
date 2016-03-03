@@ -37,6 +37,8 @@ gem 'bootswatch-rails'
 gem 'bootstrap-datepicker-rails'
 #font awesome icons
 gem 'font-awesome-rails'
+#bootstrap form
+gem 'bootstrap_form', :git => 'git://github.com/bootstrap-ruby/rails-bootstrap-forms.git'
 
 #devise
 gem 'devise', :git => 'git://github.com/plataformatec/devise.git'
