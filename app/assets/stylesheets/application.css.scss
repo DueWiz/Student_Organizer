@@ -28,9 +28,6 @@ body { padding-top: 60px; }
 // And finally bootswatch style itself
 @import "bootswatch/cerulean/bootswatch";
 
-// Whatever application styles you have go last
-@import "base";
-
 // First set or import your overrides
 // $textColor: #000;
 

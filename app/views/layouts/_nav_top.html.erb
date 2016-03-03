@@ -1,0 +1,18 @@
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="nav-header">
+            <a href="#" class="navbar-brand">Student Organizer</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"><i class="fa fa-bell"></i></a></li>
+            <li><a href="#"><i class="fa fa-envelope"></i></a></li>
+            <li><a href="#"><i class="fa fa-cog"></i></a></li>
+            <li><a href="#"><%= current_user ? "Log in" : "Log out"%></a></li>
+        </ul>
+        <form class="navbar-form navbar-right" role="search">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+            </div>
+        </form>
+    </div>
+</div>
