@@ -28,6 +28,16 @@ gem 'jbuilder', '~> 2.0'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+##front end
+# bootstrap
+gem 'bootstrap-sass', '~> 3.3.6'
+# bootswatch theme
+gem 'bootswatch-rails'
+#date picker
+gem 'bootstrap-datepicker-rails'
+#font awesome icons
+gem 'font-awesome-rails'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

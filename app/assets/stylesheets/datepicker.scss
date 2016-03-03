@@ -1,0 +1,21 @@
+.datepicker table tr td.active:active,
+.datepicker table tr td.active.highlighted:active,
+.datepicker table tr td.active.active,
+.datepicker table tr td.active.highlighted.active {
+  color: #ffffff;
+  background-image: linear-gradient(#54b4eb, #2FA4E7 60%, #1d9ce5);
+  border-color: #178acc;
+}
+
+.datepicker table tr td span.active:active,
+.datepicker table tr td span.active:hover:active,
+.datepicker table tr td span.active.disabled:active,
+.datepicker table tr td span.active.disabled:hover:active,
+.datepicker table tr td span.active.active,
+.datepicker table tr td span.active:hover.active,
+.datepicker table tr td span.active.disabled.active,
+.datepicker table tr td span.active.disabled:hover.active {
+  color: #ffffff;
+  background-image: linear-gradient(#54b4eb, #2FA4E7 60%, #1d9ce5);
+  border-color: #178acc;
+}
