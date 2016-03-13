@@ -1,5 +1,12 @@
 source 'https://rubygems.org'
 
+
+gem 'rails_12factor', group: :production
+
+gem 'sqlite3', group: :development
+
+gem 'pg', group: :production
+
 gem "devise", :github => 'plataformatec/devise', :branch => 'master'
 
 gem "omniauth"
