@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  
+  root to: "homework#index"
+
   get 'homework/index'
 
   get 'homework/new'
