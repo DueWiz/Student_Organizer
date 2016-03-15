@@ -3,9 +3,11 @@
     <div class="nav-header">
       <a href="/" class="navbar-brand">Student Organizer</a>
     </div>
+    <% if user_signed_in? %>
     <form class="navbar-form navbar-left">
-      <button class="btn btn-sm btn-success">New Homework</button>
+      <button class="btn btn-sm btn-success float-shadow">New Homework</button>
     </form>
+    <% end %>
     <ul class="nav navbar-nav navbar-right">
       <% if user_signed_in? %>
       <li>
