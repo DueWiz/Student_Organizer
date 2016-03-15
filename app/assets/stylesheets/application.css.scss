@@ -11,7 +11,7 @@
  * It is generally better to create a new file per style scope.
  *
  */
- // Example using 'Cerulean' bootswatch
+ //Using 'Flatly' bootswatch
 
 //Import bootstrap-sprockets
 @import "bootstrap-sprockets";
@@ -22,11 +22,10 @@
 // Then bootstrap itself
 @import "bootstrap";
 
-// Bootstrap body padding for fixed navbar
-body { padding-top: 60px; }
-
 // And finally bootswatch style itself
+<<<<<<< HEAD
 @import "bootswatch/cerulean/bootswatch";
+
 
 // First set or import your overrides
 // $textColor: #000;
@@ -37,7 +36,13 @@ body { padding-top: 60px; }
 // font awesome
 @import "font-awesome";
 
+//bootstrap form
+@import "rails_bootstrap_forms";
+
 //datepicker and customized css for datepicker
 @import "bootstrap-datepicker3";
 
 @import "datepicker";
+
+//users form
+@import "users";

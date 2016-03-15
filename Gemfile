@@ -44,6 +44,9 @@ gem 'bootswatch-rails'
 gem 'bootstrap-datepicker-rails'
 #font awesome icons
 gem 'font-awesome-rails'
+#bootstrap form
+gem 'bootstrap_form', :git => 'git://github.com/bootstrap-ruby/rails-bootstrap-forms.git'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
