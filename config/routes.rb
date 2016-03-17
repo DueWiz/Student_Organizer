@@ -1,5 +1,17 @@
 Rails.application.routes.draw do
 
+  get 'group/index'
+
+  get 'group/new'
+
+  get 'group/edit'
+
+  get 'group/create'
+
+  get 'group/update'
+
+  get 'group/destroy'
+
   root to: "homework#index"
 
   get 'homework/index'
