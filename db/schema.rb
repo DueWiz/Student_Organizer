@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160315020751) do
+ActiveRecord::Schema.define(version: 20160317190201) do
 
   create_table "groups", force: :cascade do |t|
     t.string   "name"
@@ -22,10 +22,14 @@ ActiveRecord::Schema.define(version: 20160315020751) do
   create_table "homeworks", force: :cascade do |t|
     t.string   "name"
     t.datetime "due_date"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "professor"
+    t.string   "description"
     t.integer  "group_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
+
+  add_index "homeworks", ["group_id"], name: "index_homeworks_on_group_id"
 
   create_table "latte_accounts", force: :cascade do |t|
     t.string   "name"
@@ -45,14 +49,18 @@ ActiveRecord::Schema.define(version: 20160315020751) do
   end
 
   create_table "user_homeworks", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "homework_id"
     t.string   "status"
     t.string   "grade"
     t.string   "comment"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "user_id"
+    t.integer  "homework_id"
+    t.string   "note"
   end
+
+  add_index "user_homeworks", ["homework_id"], name: "index_user_homeworks_on_homework_id"
+  add_index "user_homeworks", ["user_id"], name: "index_user_homeworks_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
