@@ -1,9 +1,13 @@
 <h1>Homework#index</h1>
 <table>
   <tbody>
-    <% @my_hw.each do |hw| %>
+    <% @hws.each do |_, value| %>
       <tr>
-        <td><%= hw.name %></td>
+        <td><%= value[0].name %></td>
+        <td><%= value[0].due_date %></td>
+        <td><%= value[1].status %></td>
+        <td><%= value[1].grade %></td>
+        <td><%= value[1].comment %></td>
       <tr>
     <% end %>
   <tbody>
