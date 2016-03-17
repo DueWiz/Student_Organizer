@@ -7,11 +7,16 @@
         <h4 class="modal-title" id="myModalLabel">New Homework</h4>
       </div>
       <div class="modal-body">
-        form_tag goes here
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary">Submit</button>
+          <%= bootstrap_form_for(:homework, url: homework_create_path, method: :post) do |f| %>
+            <%= f.text_field :name, autofocus: true %>
+            <%= f.text_field :due_date %>
+            missing group select
+            <%= f.text_area :description, rows: '10' %>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+              <%= f.submit "Submit", class: "btn btn-primary"%>
+            </div>
+          <% end %>
       </div>
     </div>
   </div>
