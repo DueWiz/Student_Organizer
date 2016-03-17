@@ -1,5 +1,7 @@
 class GroupController < ApplicationController
+  before_action :authenticate_user!
   def index
+    @my_groups = current_user.groups
   end
 
   def new
