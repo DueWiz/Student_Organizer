@@ -1,8 +1,17 @@
-<p>
-    group example
-</p>
-<% @my_groups.each do |group| %>
+<div class="panel panel-primary" style="margin: 10px;">
+  <div class="panel-heading">
+    <h3 class="panel-title">Groups</h3>
+  </div>
+  <div class="panel-body">
     <p>
-        <%= group.name %>
+        group example
     </p>
-<% end %>
+    <% user_groups.each do |group| %>
+        <p>
+            <%= group.name %>
+        </p>
+    <% end %>
+    <br/>
+    <button type="button" class="btn btn-sm btn-success float-shadow"  data-toggle="modal" data-target="#groupModal">New Group</button>
+  </div>
+</div>
