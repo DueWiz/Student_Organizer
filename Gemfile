@@ -45,7 +45,7 @@ gem 'bootstrap-datepicker-rails'
 #font awesome icons
 gem 'font-awesome-rails'
 #bootstrap form
-gem 'bootstrap_form', :git => 'git://github.com/bootstrap-ruby/rails-bootstrap-forms.git'
+gem 'bootstrap_form', :git => 'https://github.com/narugami/rails-bootstrap-forms.git', :branch => "features/rails5"
 
 
 group :development, :test do

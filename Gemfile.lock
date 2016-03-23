@@ -1,10 +1,4 @@
 GIT
-  remote: git://github.com/bootstrap-ruby/rails-bootstrap-forms.git
-  revision: 941edb9535f4cc38f175368439453294618bd501
-  specs:
-    bootstrap_form (2.3.0)
-
-GIT
   remote: git://github.com/plataformatec/devise.git
   revision: 69bee06ceee6280b54304928bb6e55c5064abad8
   branch: master
@@ -15,6 +9,13 @@ GIT
       railties (>= 4.1.0, < 5.1)
       responders
       warden (~> 1.2.3)
+
+GIT
+  remote: https://github.com/narugami/rails-bootstrap-forms.git
+  revision: 0d8607f0abecae3f5daace592bb02f9628a2259b
+  branch: features/rails5
+  specs:
+    bootstrap_form (2.3.0)
 
 GEM
   remote: https://rubygems.org/
