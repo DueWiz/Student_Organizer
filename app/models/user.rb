@@ -5,5 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_one :latte_account
-  has_and_belongs_to_many :groups
+  has_many :user_homeworks
+  has_many :homeworks, through: :user_homeworks
+  has_many :group_users
+  has_many :groups, through: :group_users
 end
