@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'user_homework/index'
+
   get 'group/index'
 
   get 'group/new'
