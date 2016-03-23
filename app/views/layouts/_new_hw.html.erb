@@ -7,10 +7,11 @@
         <h4 class="modal-title" id="myModalLabel">New Homework</h4>
       </div>
       <div class="modal-body">
-          <%= bootstrap_form_for(:homework, url: homework_create_path, method: :post) do |f| %>
+          <%= bootstrap_form_for @homework, url: homework_create_path(@homework), method: :post, class:"form-group" do |f| %>
             <%= f.text_field :name, autofocus: true %>
             <%= f.text_field :due_date %>
-            missing group select
+            <label>Group</label>
+            <%= select_tag "group", options_from_collection_for_select(user_groups, "id", "name"), class: "form-control" %>
             <%= f.text_area :description, rows: '10' %>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>

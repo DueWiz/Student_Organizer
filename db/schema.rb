@@ -51,6 +51,13 @@ ActiveRecord::Schema.define(version: 20160317214606) do
 
   add_index "latte_accounts", ["user_id"], name: "index_latte_accounts_on_user_id"
 
+  create_table "user_groups", force: :cascade do |t|
+    t.integer  "group_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "user_homeworks", force: :cascade do |t|
     t.string   "status"
     t.string   "grade"
