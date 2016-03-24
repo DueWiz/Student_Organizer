@@ -15,13 +15,15 @@ Rails.application.routes.draw do
   get 'group/destroy'
 
   root to: "homework#index"
-
-  get 'homework/index'
-
+  get 'homework' => 'homework#index'
+  # resources :homework
+  #
   get 'homework/new'
 
   get 'homework/edit'
-
+  controller :homework do
+    post 'homework/create' => :create
+  end
   get 'homework/create'
 
   get 'homework/update'

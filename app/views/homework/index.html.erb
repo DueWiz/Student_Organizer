@@ -1,14 +1,11 @@
-<h1>Homework#index</h1>
-<table>
+<table class = "table table-striped">
   <tbody>
+    <h3>Hi, <%= User.find_by_id(current_user.id).email%><h3>
     <% @hws.each do |_, value| %>
       <tr>
-        <td><%= value[0].name %></td>
-        <td><%= value[0].due_date %></td>
-        <td><%= value[1].status %></td>
-        <td><%= value[1].grade %></td>
-        <td><%= value[1].comment %></td>
-      <tr>
+        <td>time left: <%= value[2] %></td>
+        <td><button trype = "button" class = "btn btn-info"><%= value[0].name %></button></td>
+      </tr>
     <% end %>
   <tbody>
 <table>
