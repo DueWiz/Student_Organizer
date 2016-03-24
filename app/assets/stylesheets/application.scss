@@ -13,24 +13,24 @@
  */
  //Using 'Flatly' bootswatch
 
-//Import bootstrap-sprockets
-@import "bootstrap-sprockets";
+
 
 // Import cerulean variables
-@import "bootswatch/flatly/variables";
+//@import "bootswatch/flatly/variables";
 
 // Then bootstrap itself
+
 @import "bootstrap";
 
 // And finally bootswatch style itself
-@import "bootswatch/flatly/bootswatch";
+//@import "bootswatch/flatly/bootswatch";
 
 
 // First set or import your overrides
 // $textColor: #000;
 
 // Then load variables
-// @import "bootswatch/journal/variables";
+//@import "bootswatch/journal/variables";
 
 // font awesome
 @import "font-awesome";

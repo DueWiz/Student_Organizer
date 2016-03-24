@@ -37,9 +37,8 @@ gem 'jbuilder', '~> 2.0'
 
 ##front end
 # bootstrap
-gem 'bootstrap-sass', '~> 3.3.6'
-# bootswatch theme
-gem 'bootswatch-rails'
+gem 'bootstrap', '~> 4.0.0.alpha3'
+
 #date picker
 gem 'bootstrap-datepicker-rails'
 #font awesome icons
@@ -64,3 +63,4 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'sprockets-rails', :require => 'sprockets/railtie'
