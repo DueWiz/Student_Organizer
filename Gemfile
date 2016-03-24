@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'pundit', '~> 1.1'
 
 gem 'rails_12factor', group: :production
 
