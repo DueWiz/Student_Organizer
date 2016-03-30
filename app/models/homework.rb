@@ -1,5 +1,5 @@
 class Homework < ApplicationRecord
-  validates :name, presence: true
+  validates :name, :due_date, presence: true
 
   has_many :user_homeworks
 
