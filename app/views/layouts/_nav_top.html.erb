@@ -1,50 +1,42 @@
-<div class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-dark navbar-fixed-top bg-faded" style="background-color: #2c3e50;">
   <div class="container">
-    <div class="nav-header">
+    <div class="nav-header col-xs-1">
       <a href="/" class="navbar-brand">DueWiz</a>
     </div>
     <% if user_signed_in? %>
-    <form class="navbar-form navbar-left">
+    <form class="navbar-form col-xs-1">
       <button type="button" class="btn btn-sm btn-success float-shadow"  data-toggle="modal" data-target="#myModal">New Homework</button>
     </form>
     <% end %>
-    <ul class="nav navbar-nav navbar-right">
+
+
+    <div class="pull-xs-right">
       <% if user_signed_in? %>
-      <li>
+      <div class="col-xs-1">
         <a href="#">
-          <i class="fa fa-bell"></i>
+          <i class="fa fa-bell" style="color:white"></i>
         </a>
-      </li>
-      <li>
-        <a href="#">
-          <i class="fa fa-envelope"></i>
-        </a>
-      </li>
-      <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i> <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><%= link_to 'Edit User Profile', edit_user_registration_path %></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
-      <li>
-      <li>
-        <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
-      </li>
-    <% else %>
-      <li>
-        <%= link_to('Login', new_user_session_path)  %>
-      </li>
-      <% end %>
-    </ul>
-    <% if user_signed_in? %>
-    <form class="navbar-form navbar-right" role="search">
-      <div class="form-group">
-        <input type="text" class="form-control" placeholder="Search">
       </div>
-    </form>
-    <% end %>
-  </div>
-</div>
+      <div class="col-xs-1">
+        <a href="#">
+          <i class="fa fa-envelope" style="color:white"></i>
+        </a>
+      </div>
+      <div class="col-xs-1">
+        <%= link_to edit_user_registration_path do %>
+          <i class="fa fa-cog" style="color:white"></i>
+        <% end %>
+      </div>
+
+      <div class="col-xs-1" style="color:white">
+        <%= link_to('Logout', destroy_user_session_path, :method => :delete, class: 'link-to-text-color')  %>
+      </div>
+    <% else %>
+      <div class="col-xs-1">
+        <%= link_to('Login', new_user_session_path)  %>
+      </div>
+      <% end %>
+    </div>
+
+
+</nav>

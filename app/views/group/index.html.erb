@@ -1,11 +1,6 @@
-<div class="panel panel-primary" style="margin: 10px;">
-  <div class="panel-heading">
-    <h3 class="panel-title">Groups</h3>
-  </div>
-  <div class="panel-body">
-    <p>
-        group example
-    </p>
+<div class="card link-to-text-color" >
+  <h3 class="card-header" style="background-color: #2c3e50;">Groups</h3>
+  <div class="card-block">
     <% user_groups.each do |group| %>
         <p>
             <%= group.name %>
@@ -13,5 +8,6 @@
     <% end %>
     <br/>
     <button type="button" class="btn btn-sm btn-success float-shadow"  data-toggle="modal" data-target="#groupModal">New Group</button>
+
   </div>
 </div>
