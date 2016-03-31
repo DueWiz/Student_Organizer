@@ -1,5 +1,6 @@
 class HomeworkController < ApplicationController
   before_action :authenticate_user!
+
   def index
     # @hws = Hash.new
     # my_hw = UserHomework.where("user_id = ?", current_user.id)
