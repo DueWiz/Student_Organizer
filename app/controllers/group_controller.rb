@@ -18,6 +18,10 @@ class GroupController < ApplicationController
 
   def destroy
   end
+  def show
+    @group = Group.find_by_id(params[:id])
+
+  end
   def create
     @new = Group.create(name: params[:group][:name])
     @new.save!

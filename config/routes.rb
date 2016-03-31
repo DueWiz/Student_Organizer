@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'group/:id' => 'group#show', as: :groupshow
+
   get 'user_homework/index'
 
   get 'group/index'
