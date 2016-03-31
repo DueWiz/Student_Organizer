@@ -7,6 +7,7 @@ class CreateUserHomeworks < ActiveRecord::Migration[5.0]
       t.string :grade
       t.string :comment
       t.boolean :admin, null: false, default: false
+      
       t.timestamps
     end
   end

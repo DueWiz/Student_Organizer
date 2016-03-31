@@ -38,7 +38,7 @@ class HomeworkController < ApplicationController
                                  params[:homework]["due_date(5i)"].to_i,)
     @new.description = params[:homework][:description]
     @new.save!
-    UserHomework.create(user_id: current_user.id, homework_id: @new.id)
+    UserHomework.create(user_id: current_user.id, homework_id: @new.id, admin: true)
     redirect_to homework_url
   end
 
