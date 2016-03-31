@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  post 'latte/create'
+
   get 'user_homework/index'
 
   get 'group/index'

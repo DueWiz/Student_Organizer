@@ -14,7 +14,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def has_latte?
+      current_user.latte_account.present?
+  end
+
   def init
       @homework = Homework.new
+      @latte = LatteAccount.new
   end
 end
