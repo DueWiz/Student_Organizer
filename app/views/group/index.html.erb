@@ -3,12 +3,9 @@
     <h3 class="panel-title">Groups</h3>
   </div>
   <div class="panel-body">
-    <p>
-        group example
-    </p>
     <% user_groups.each do |group| %>
         <p>
-            <%= group.name %>
+          <%= link_to group.name, groupshow_path(group) %>
         </p>
     <% end %>
     <br/>

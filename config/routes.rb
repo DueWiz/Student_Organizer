@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
   post 'latte/create'
+  
+  get 'group/:id' => 'group#show', as: :groupshow
 
   get 'user_homework/index'
 
@@ -10,8 +12,10 @@ Rails.application.routes.draw do
 
   get 'group/edit'
 
+  controller :group do
+    post 'group/create' => :create
+  end
   get 'group/create'
-
   get 'group/update'
 
   get 'group/destroy'
