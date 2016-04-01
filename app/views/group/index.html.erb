@@ -3,11 +3,11 @@
   <div class="card-block">
     <% user_groups.each do |group| %>
         <p>
-            <%= group.name %>
+          <%= link_to group.name, groupshow_path(group) %>
         </p>
     <% end %>
     <br/>
-    <button type="button" class="btn btn-sm btn-success float-shadow"  data-toggle="modal" data-target="#groupModal">New Group</button>
+    <button type="button" class="btn btn-sm btn-success float-shadow"  data-toggle="modal" data-target="#groupModal" style = "background-color: #18bc9c">New Group</button>
 
   </div>
 </div>

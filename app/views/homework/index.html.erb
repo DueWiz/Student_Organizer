@@ -1,56 +1,10 @@
-<!-- <table class = "table table-striped">
+<table class = "table table-striped">
   <tbody>
     <h3>Hi, <%= User.find_by_id(current_user.id).email%><h3>
-    <% @hws.each do |_, value| %>
-      <tr>
-        <td>time left: <%= value[2] %></td>
-        <td><button trype = "button" class = "btn btn-info"><%= value[0].name %></button></td>
-      </tr>
+    <% @my_hw.each do |hw| %>
+      <p>
+        <%= link_to hw.name, homeworkshow_path(hw) %>
+      </p>
     <% end %>
-  </tbody>
-</table>
-
-
-
-
-
-<div class="card card-inverse card-primary text-xs-center">
-  <div class="card-block">
-    <blockquote class="card-blockquote">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-      <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
-    </blockquote>
-  </div>
-</div>
-<div class="card card-inverse card-success text-xs-center">
-  <div class="card-block">
-    <blockquote class="card-blockquote">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-      <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
-    </blockquote>
-  </div>
-</div>
-<div class="card card-inverse card-info text-xs-center">
-  <div class="card-block">
-    <blockquote class="card-blockquote">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-      <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
-    </blockquote>
-  </div>
-</div>
-<div class="card card-inverse card-warning text-xs-center">
-  <div class="card-block">
-    <blockquote class="card-blockquote">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-      <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
-    </blockquote>
-  </div>
-</div>
-<div class="card card-inverse card-danger text-xs-center">
-  <div class="card-block">
-    <blockquote class="card-blockquote">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-      <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
-    </blockquote>
-  </div>
-</div> -->
+  <tbody>
+<table>

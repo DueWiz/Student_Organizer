@@ -3,9 +3,13 @@
     <div class="nav-header col-xs-1">
       <a href="/" class="navbar-brand">DueWiz</a>
     </div>
+
     <% if user_signed_in? %>
-    <form class="navbar-form col-xs-1">
-      <button type="button" class="btn btn-sm btn-success float-shadow"  data-toggle="modal" data-target="#myModal">New Homework</button>
+    <form class="navbar-form col-xs-4">
+      <button type="button" class="btn btn-sm btn-success float-shadow"  data-toggle="modal" data-target="#myModal" style = "background-color: #18bc9c">New Homework</button>
+      <% #if has_latte? %>
+      <button type="button" class="btn btn-sm btn-success float-shadow"  data-toggle="modal" data-target="#latteModal" style = "background-color: #18bc9c">Subscribe Latte</button>
+      <%# end %>
     </form>
     <% end %>
 

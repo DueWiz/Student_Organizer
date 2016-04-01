@@ -11,8 +11,11 @@
   </head>
 
   <body>
+    <% if user_signed_in? %>
+    <%= render "layouts/new_latte" %>
     <%= render "layouts/new_group" %>
     <%= render "layouts/new_hw" %>
+    <% end %>
     <%= render "layouts/nav_top" %>
     <div class="container-fluid">
       <% if user_signed_in? %>

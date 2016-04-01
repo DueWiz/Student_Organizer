@@ -18,4 +18,14 @@ class GroupController < ApplicationController
 
   def destroy
   end
+  def show
+    @group = Group.find_by_id(params[:id])
+  end
+  def create
+    @new = Group.create(name: params[:group][:name])
+    @new.save!
+    GroupUser.create(user_id: current_user.id, group_id: @new.id)
+    redirect_to homework_url
+  end
+
 end

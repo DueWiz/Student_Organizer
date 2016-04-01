@@ -1,15 +1,16 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+
 one:
   user_id: 1
   homework_id: 1
-  status: MyString
-  grade: MyString
-  comment: MyString
+  status: DONE
+  grade: 100
+  comment: Good
 
 two:
-  user_id: 1
-  homework_id: 1
-  status: MyString
-  grade: MyString
-  comment: MyString
+  user_id: 2
+  homework_id: 2
+  status: NO
+  grade: -1
+  comment: N/A

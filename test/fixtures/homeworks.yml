@@ -1,11 +1,14 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+
 one:
-  name: MyString
+  id: 1
+  name: HW1
   due_date: 2016-03-03 15:44:53
   group_id: 1
 
 two:
-  name: MyString
-  due_date: 2016-03-03 15:44:53
+  id: 2
+  name: HW2
+  due_date: 2016-03-27 15:44:53
   group_id: 1
