@@ -1,4 +1,4 @@
-## Student Organizer
+## Student Organizer [![Code Climate](https://codeclimate.com/github/DueWiz/Student_Organizer/badges/gpa.svg)](https://codeclimate.com/github/DueWiz/Student_Organizer)
 
 ### Description
 A web app that helps students manage their homework/tasks/etc.
