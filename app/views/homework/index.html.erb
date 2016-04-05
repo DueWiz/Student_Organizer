@@ -1,10 +1,23 @@
-<table class = "table table-striped">
-  <tbody>
-    <h3>Hi, <%= User.find_by_id(current_user.id).email%><h3>
-    <% @my_hw.each do |hw| %>
-      <p>
-        <%= link_to hw.name, homeworkshow_path(hw) %>
-      </p>
-    <% end %>
-  <tbody>
-<table>
+<h3>Hi, <%= User.find_by_id(current_user.id).email%><h3>
+<div class="card-columns">
+  <% @my_hw.each do |hw| %>
+  <div class="card card-inverse card-success">
+    <div class="card-block">
+      <div class="row">
+        <blockquote class="card-blockquote">
+          <div class="col-sm-4">
+            <h3> <%=hw.due_date.day-Time.new.day%> </h3>
+          </div>
+          <div class="col-sm-8 link-to-text-color">
+            <h6>
+            <p>Name: <%= link_to(hw.name, homeworkshow_path(hw), :method => :get, class: 'link-to-text-color')  %></p>
+            <p>Professor: <%= hw.professor%></p>
+            <p>Description: <%= hw.description%></p>
+            </h6>
+          </div>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
