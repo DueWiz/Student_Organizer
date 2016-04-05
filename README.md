@@ -31,3 +31,5 @@ Apache License v2.0
 CodeShip Deployed
 
 CodeShip checked
+
+Codeship master push test
