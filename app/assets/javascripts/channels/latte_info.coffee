@@ -6,4 +6,4 @@ App.latte_info = App.cable.subscriptions.create "LatteInfoChannel",
     # Called when the subscription has been terminated by the server
 
   received: (data) ->
-    # Called when there's incoming data on the websocket for this channel
+    $('#latte_info').html(data)

@@ -6,7 +6,7 @@ class LatteController < ApplicationController
         @latte.user_id = params["user_id"]
         respond_to do |format|
             if @latte.save
-                format.html { redirect_to welcome_index_path, notice: 'latte completed.' }
+                format.html { redirect_to latte_info_path, task: 'refresh_latte' }
                 format.json { render json: @latte, status: :created, location: @latte }
                 format.js
             else
@@ -22,5 +22,9 @@ class LatteController < ApplicationController
       respond_to do |format|
          format.js { render file: "/app/views/latte/destroy"}
       end
+    end
+
+    def info
+      ActionCable.server.broadcast "latte_info_#{current_user.id}", latte_info: 'good'
     end
 end
