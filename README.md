@@ -1,4 +1,4 @@
-## Student Organizer [![Code Climate](https://codeclimate.com/github/DueWiz/Student_Organizer/badges/gpa.svg)](https://codeclimate.com/github/DueWiz/Student_Organizer)
+## Student Organizer [![Code Climate](https://codeclimate.com/github/DueWiz/Student_Organizer/badges/gpa.svg)](https://codeclimate.com/github/DueWiz/Student_Organizer)[![Codeship Status for DueWiz/Student_Organizer](https://codeship.com/projects/17976f30-d858-0133-0e28-461df0797546/status?branch=master)](https://codeship.com/projects/143187)
 
 ### Description
 A web app that helps students manage their homework/tasks/etc.
@@ -31,5 +31,3 @@ Apache License v2.0
 CodeShip Deployed
 
 CodeShip checked
-
-Codeship master push test
