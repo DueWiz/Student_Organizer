@@ -24,7 +24,7 @@ class GroupController < ApplicationController
   def create
     @new = Group.create(name: params[:group][:name])
     @new.save!
-    GroupUser.create(user_id: current_user.id, group_id: @new.id)
+    GroupUser.create(user_id: current_user.id, group_id: @new.id, admin: true)
     redirect_to homework_url
   end
 
