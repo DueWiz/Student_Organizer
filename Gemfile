@@ -35,6 +35,12 @@ gem 'jbuilder', '~> 2.0'
 
 gem 'foreman'
 
+gem 'mechanize'
+
+gem 'redis'
+
+gem 'aescrypt'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
