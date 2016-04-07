@@ -18,13 +18,38 @@ class HomeworkController < ApplicationController
     #     @hws[hw.homework_id] = [temp, hw, timeLeft]
     #   end
     # end
-    @my_hw = current_user.homeworks
+    @my_hw = current_user.homeworks.order(:due_date)
+    @table = Array.new
+    index = 0
+    count = 0
+    @my_hw.each do |hw|
+      if count == 0
+        @table[index] = Array.new
+      end
+      @table[index] += [hw]
+      count += 1
+      if count == 3
+        index += 1
+        count = 0
+      end
+    end
   end
 
   def new
   end
 
   def edit
+    homework = Homework.find_by_id(params[:id])
+    homework.name = params[:homework][:name]
+    Time.zone = 'EST'
+    homework.due_date = Time.zone.local(params[:homework]["due_date(1i)"].to_i,
+                                 params[:homework]["due_date(2i)"].to_i,
+                                 params[:homework]["due_date(3i)"].to_i,
+                                 params[:homework]["due_date(4i)"].to_i,
+                                 params[:homework]["due_date(5i)"].to_i,)
+    homework.description = params[:homework][:description]
+    homework.save!
+    redirect_to homeworkshow_path
   end
 
   def create
@@ -48,6 +73,7 @@ class HomeworkController < ApplicationController
   end
 
   def update
+    @homework = Homework.find_by_id(params[:id])
   end
 
   def destroy
