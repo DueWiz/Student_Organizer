@@ -9,7 +9,4 @@ class GroupPolicy
   def create?
   	true
   end
-
-  
-
 end

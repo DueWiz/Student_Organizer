@@ -7,6 +7,10 @@ class HomeworkPolicy
   end
 
   def create?
+  	true
   end
 
+  def edit?
+
+  end
 end
