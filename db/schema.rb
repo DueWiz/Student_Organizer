@@ -16,9 +16,8 @@ ActiveRecord::Schema.define(version: 20160407184451) do
   create_table "group_users", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "group_id"
-    t.boolean  "admin",      default: false, null: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "group_users", ["group_id"], name: "index_group_users_on_group_id"
@@ -55,13 +54,19 @@ ActiveRecord::Schema.define(version: 20160407184451) do
 
   add_index "latte_accounts", ["user_id"], name: "index_latte_accounts_on_user_id"
 
+  create_table "user_groups", force: :cascade do |t|
+    t.integer  "group_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "user_homeworks", force: :cascade do |t|
     t.string   "status"
     t.string   "grade"
     t.string   "comment"
-    t.boolean  "admin",       default: false, null: false
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.integer  "user_id"
     t.integer  "homework_id"
     t.string   "note"
@@ -71,19 +76,18 @@ ActiveRecord::Schema.define(version: 20160407184451) do
   add_index "user_homeworks", ["user_id"], name: "index_user_homeworks_on_user_id"
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "",    null: false
-    t.string   "encrypted_password",     default: "",    null: false
-    t.boolean  "admin",                  default: false, null: false
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,     null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
