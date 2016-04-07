@@ -27,7 +27,7 @@ class LatteController < ApplicationController
     end
 
     def info
-
+      render "latte/info"
       ActionCable.server.broadcast "latte_info_#{current_user.id}",
         latte_info: 'good'
       agent = Mechanize.new
@@ -41,20 +41,20 @@ class LatteController < ApplicationController
       form.field_with(:id => "password").value = current_user.latte_account.password
       page = agent.submit(form, form.buttons_with(:type => /submit/)[0])
       ActionCable.server.broadcast "latte_info_#{current_user.id}", latte_info: 'Logged in'
-      logger.info "This is a logger info"
-      logger.info ENV["SECRET_KEY_BASE"]
       page.links_with(css: "a.course_show").each { |link|
     if link.text =~ /^161/
         course_page = link.click
         course_page.links_with(css: "li.assign div.activityinstance a").each { |a_link|
           assignment_page = a_link.click
-          ActionCable.server.broadcast "latte_info_#{current_user.id}", latte_info: assignment_page.xpath("//div[@role='main']/h2/text()")
-          ActionCable.server.broadcast "latte_info_#{current_user.id}", latte_info: assignment_page.xpath("//td[contains(., 'Submission status')]/following-sibling::td/text()")
-          ActionCable.server.broadcast "latte_info_#{current_user.id}", latte_info: assignment_page.xpath("//td[contains(., 'Due date')]/following-sibling::td/text()")
+          a_title = assignment_page.xpath("//div[@role='main']/h2/text()")
+          ActionCable.server.broadcast "latte_info_#{current_user.id}", latte_info: "#{a_title}"
+          a_sub_status = assignment_page.xpath("//td[contains(., 'Submission status')]/following-sibling::td/text()")
+          ActionCable.server.broadcast "latte_info_#{current_user.id}", latte_info: "#{a_sub_status}"
+          a_due_date = assignment_page.xpath("//td[contains(., 'Due date')]/following-sibling::td/text()")
+          ActionCable.server.broadcast "latte_info_#{current_user.id}", latte_info: "#{a_due_date}"
+          ActionCable.server.broadcast "latte_info_#{current_user.id}", latte_info: "Entered assignment page"
         }
-        # file = File.open("course_page#{count}.html", "w")
-        # file.write(course_page.content)
-        # count += 1
+        #redirect_to "user_homework/index"
     end
 }
     end

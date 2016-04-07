@@ -6,4 +6,5 @@ App.latte_info = App.cable.subscriptions.create "LatteInfoChannel",
     # Called when the subscription has been terminated by the server
 
   received: (data) ->
-    $('#latte_info').append(data.latte_info)
+    $('#latte_info').append(data.latte_info + "<br/>")
+    $(document).scrollTop($(document).height()+1500);
