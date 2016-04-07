@@ -39,7 +39,7 @@ gem 'mechanize'
 
 gem 'redis'
 
-gem 'aescrypt'
+gem "attr_encrypted"
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

@@ -4,6 +4,7 @@ class LatteController < ApplicationController
         @latte = LatteAccount.new
         @latte.name = params["latte_account"]["name"]
         @latte.password = params["latte_account"]["password"]
+        logger.info "Post password::: #{params['latte_account']['password']}"
         @latte.user_id = params["user_id"]
         respond_to do |format|
             if @latte.save
@@ -26,7 +27,7 @@ class LatteController < ApplicationController
     end
 
     def info
-      
+
       ActionCable.server.broadcast "latte_info_#{current_user.id}",
         latte_info: 'good'
       agent = Mechanize.new
