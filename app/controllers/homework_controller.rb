@@ -69,6 +69,7 @@ class HomeworkController < ApplicationController
 
   def show
     @this_hw = Homework.find_by_id(params[:id])
+    @due = time_due(@this_hw.due_date)
     @this_userhw = current_user.user_homeworks.find_by_homework_id(params[:id])
   end
 

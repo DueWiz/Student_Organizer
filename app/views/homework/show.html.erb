@@ -1,12 +1,49 @@
-<table class = "table table-striped">
-  <tbody>
-      <p><%= @this_hw.name %></p>
-      <p><%= @this_hw.due_date %></p>
-      <p><%= time_due(@this_hw.due_date) %></p>
-      <p><%= @this_userhw.status %></p>
-      <p><%= @this_userhw.grade %></p>
-      <p><%= @this_userhw.comment %></p>
-      <%= link_to 'Update', homeworkupdate_path(@this_hw)%>
-
-  <tbody>
-<table>
+<p><a href="#name" class="btn btn-info btn-sm" data-toggle="collapse">Homework Name:</a>
+  <div id="name" class="collapse.in">
+    <%= @this_hw.name %>
+  </div>
+</p>
+<p><a href="#due" class="btn btn-info btn-sm" data-toggle="collapse">Due Date:</a>
+  <div id="due" class="collapse.in">
+    <%= @this_hw.due_date %>
+  </div>
+</p>
+<p><a href="#daystodue" class="btn btn-info btn-sm" data-toggle="collapse">Time Left:</a>
+  <div id="daystodue" class="collapse.in">
+    <% if @due[0] >= 0 && @due[1] >= 0 && @due[2] >= 0 %>
+      <%= @due[0] %> days, <%= @due[1] %> hours, <%= @due[2]%> minutes left.
+    <% else %>
+      <div class="alert alert-danger" role="alert">
+        Warning! Your assignment is already past due by <%= -@due[0] %> days, <%= @due[1] %> hours, <%= @due[2]%> minutes.
+      </div>
+    <% end %>
+  </div>
+</p>
+<p><a href="#status" class="btn btn-info btn-sm" data-toggle="collapse">Status:</a>
+  <div id="status" class="collapse.in">
+    <% if @this_userhw.status == nil %>
+      No submission yet.
+    <% else %>
+      <%= @this_userhw.status%>
+    <% end %>
+  </div>
+</p>
+<p><a href="#grade" class="btn btn-info btn-sm" data-toggle="collapse">Grade:</a>
+  <div id="grade" class="collapse.in">
+    <% if @this_userhw.grade == nil %>
+      Not graded.
+    <% else %>
+      <%= @this_userhw.grade%>
+    <% end %>
+  </div>
+</p>
+<p><a href="#comment" class="btn btn-info btn-sm" data-toggle="collapse">Comment:</a>
+  <div id="comment" class="collapse.in">
+    <% if @this_userhw.comment == nil %>
+      No comment.
+    <% else %>
+      <%= @this_userhw.comment%>
+    <% end %>
+  </div>
+</p>
+<%= link_to 'Update', homeworkupdate_path(@this_hw)%>
