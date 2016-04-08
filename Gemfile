@@ -39,7 +39,9 @@ gem 'mechanize'
 
 gem 'redis'
 
-gem "attr_encrypted"
+gem "attr_encrypted", '~> 3.0.1'
+
+gem 'sidekiq'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
