@@ -1,2 +1,10 @@
-<h1>Homework#update</h1>
-<p>Find me in app/views/homework/update.html.erb</p>
+<h1><%= @homework.name %></h1>
+<%= bootstrap_form_for @homework, url: homeworkedit_path(@homework), method: :get, class:"form-group" do |f| %>
+  <%= f.text_field :name, autofocus: true %>
+  <%= f.datetime_select :due_date, :minute_step => 15%>
+  <label>Group</label>
+  <%= select_tag "group", options_from_collection_for_select(user_groups, "id", "name"), class: "form-control" %>
+  <%= f.text_area :description, rows: '10' %>
+  <%= link_to 'Cancel', homeworkshow_path(@homework), class: "btn btn-info" %>
+  <%= f.submit "Submit", class: "btn btn-primary"%>
+<% end %>
