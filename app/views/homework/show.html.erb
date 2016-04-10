@@ -1,8 +1,9 @@
-<p><a href="#name" class="btn btn-info btn-sm" data-toggle="collapse">Homework Name:</a>
-  <div id="name" class="collapse.in">
-    <%= @this_hw.name %>
+<br>
+<div class = "card" style = "border-radius:20px;">
+  <div class="card-header link-to-text-color" style="background-color: #2c3e50;border-top-left-radius:1.25em; border-top-right-radius:1.25em;">
+    <h2><%= @this_hw.name %></h2>
   </div>
-</p>
+  <div class="container">
 <p><a href="#due" class="btn btn-info btn-sm" data-toggle="collapse">Due Date:</a>
   <div id="due" class="collapse.in">
     <%= @this_hw.due_date %>
@@ -47,3 +48,5 @@
   </div>
 </p>
 <%= link_to 'Update', homeworkupdate_path(@this_hw)%>
+</div>
+</div>

@@ -11,7 +11,7 @@ Group.delete_all
 UserHomework.delete_all
 
 user = User.create! :email => 'test@email.com', :password => 'topsecret', :password_confirmation => 'topsecret'
-group = Group.create! :name => 'testgroup', :section => 1, :term =>'Spring', :year => 2016
+group = Group.create! :name => 'testgroup', :secteion => 1, :term =>'Spring', :year => 2016
 GroupUser.create(user_id: user[:id], group_id: group[:id])
 homework = Homework.create(name: 'testhomework', due_date: DateTime.new(2009,9,1,17),
   description: "this is the description for test",

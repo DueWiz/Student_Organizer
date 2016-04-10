@@ -9,6 +9,13 @@
       <div class="modal-body">
         <%= bootstrap_form_for(:group, url: group_create_path, method: :post) do |f| %>
           <%= f.text_field :name, autofocus: true %>
+          <!-- <select class="form-control">
+            <option value=2014>2014</option>
+            <option value=2015>2015</option>
+            <option value=2016>2016</option>
+            <option value=2017>2017</option>
+            <option value=2018>2018</option>
+          </select> -->
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
             <%= f.submit "Submit", class: "btn btn-primary"%>
