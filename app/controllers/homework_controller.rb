@@ -44,7 +44,7 @@ class HomeworkController < ApplicationController
       if time_remain[1] == 0 # min
         num = time_remain[2]
         card_class = "danger"
-        time_info = "Minutes"
+        time_info = "Mins"
       else
         num = time_remain[1] #hour
         card_class = "warning"
@@ -57,7 +57,7 @@ class HomeworkController < ApplicationController
         time_info = "Done"
       else
         num = time_remain[0]
-        time_info = "days"
+        time_info = "Days"
         if time_remain[0] < 7
           card_class = "info"
         else

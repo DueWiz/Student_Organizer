@@ -11,34 +11,40 @@
   background-color: rgb(255, 153, 153);
 }</style>
 <br>
-<table style="border-collapse: separate; border-spacing: 20px 1px;">
-  <% @table.each_with_index do |hw, i| %>
-    <tr>
-      <% hw.each_with_index do |h, j| %>
-      <td>
-        <%= link_to homeworkshow_path(h) do %>
-        <div class="card card-inverse card-<%= @date_infos[i][j][0]%> ">
-        <div class="card-deck">
-            <!-- <blockquote class="card-blockquote "> -->
-              <div class="col-sm-4 link-to-text-color", style="padding: 0px; text-align: center; ">
-                <h1> <%= @date_infos[i][j][1].to_s %></h1>
-                <div >
-                <h3> <%= @date_infos[i][j][2]%></h3>
+<%= form_tag(homework_path, method: "get", remote: true, role: "form", class: "form", id: "special") do %>
+  <%= check_box_tag(:completed, onchange: "$('#special').submit();")%> <%= label_tag(:completed, "Completed") %>
+  <%= check_box_tag(:all, onchange: "$('#special').submit();")%> <%= label_tag(:all, "All") %>
+<% end %>
+<div id = "hw_result" >
+  <table style="border-collapse: separate; border-spacing: 20px 1px;">
+    <% @table.each_with_index do |hw, i| %>
+      <tr>
+        <% hw.each_with_index do |h, j| %>
+        <td>
+          <%= link_to homeworkshow_path(h) do %>
+          <div class="card card-inverse card-<%= @date_infos[i][j][0]%> ">
+          <div class="card-deck">
+              <!-- <blockquote class="card-blockquote "> -->
+                <div class="col-sm-4 link-to-text-color">
+                  <h1 style="text-align: center; "> <%= @date_infos[i][j][1].to_s %></h1>
+                  <div style="padding: 0px; margin: 0px;">
+                  <h4 > <%= @date_infos[i][j][2]%></h4>
+                  </div>
                 </div>
-              </div>
-              <div class="col-sm-8 link-to-text-color">
-                <h6>
-                  <p>Name: <%= h.name%></p>
-                  <p>Professor: <%= h.professor%></p>
-                  <p>Description: <%= h.description%></p>
-                </h6>
-              </div>
-            <!-- </blockquote> -->
-        </div>
-        </div>
+                <div class="col-sm-8 link-to-text-color">
+                  <h6>
+                    <p>Name: <%= h.name%></p>
+                    <p>Professor: <%= h.professor%></p>
+                    <p>Description: <%= h.description%></p>
+                  </h6>
+                </div>
+              <!-- </blockquote> -->
+          </div>
+          </div>
+          <% end %>
+        </td>
         <% end %>
-      </td>
-      <% end %>
-    </tr>
-  <% end %>
-</table>
+      </tr>
+    <% end %>
+  </table>
+</div>
