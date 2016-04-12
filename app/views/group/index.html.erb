@@ -1,14 +1,28 @@
 <p>
 <div class="card link-to-text-color" style="border-radius:20px;width:100%;">
-  <h3 class="card-header" style="background-color: #2c3e50; border-top-left-radius:0.5em; border-top-right-radius:0.5em;">Groups</h3>
-  <div class="card-block">
-    <% user_groups.each do |group| %>
-        <p>
-          <%= link_to group.name, groupshow_path(group) %>
-        </p>
-    <% end %>
+  <div class="card-header" style="background-color: #2c3e50; border-top-left-radius:0.5em; border-top-right-radius:0.5em; margin:0px;">
+    <div class="row">
+    <div class = "col-sm-5">
+    <h4>Classes</h4>
+    </div>
+    <div class="col-sm-7">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Find Classes" style="border-radius:15px;">
+      </div><!-- /input-group -->
+    </div><!-- /.col-lg-6 -->
+  </div>
+  </div>
+  <div class="card-block" style="padding:10px;">
+    <table class="table table-condense table-hover" style="border-spacing: 0px 0px;">
+      <% user_groups.each do |group| %>
+        <tr>
+          <td><%= link_to group.name, groupshow_path(group) %></td>
+        <tr>
+      <% end %>
+    </table>
     <br/>
-    <button type="button" class="btn btn-sm btn-success float-shadow"  data-toggle="modal" data-target="#groupModal" style = "background-color: #18bc9c">New Group</button>
-
+    <div style = "padding:10px;">
+      <button type="button" class="btn btn-sm btn-success float-shadow"  data-toggle="modal" data-target="#groupModal" style = "background-color: #18bc9c;">New Class</button>
+    </div>
   </div>
 </div>

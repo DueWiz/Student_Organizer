@@ -1,9 +1,5 @@
 
 <style>
-table {
-    border-collapse: separate;
-    border-spacing: 20px 1px;
-}
 .card-inverse {
   height: 200px;
   width: 300px;
@@ -12,7 +8,7 @@ table {
 }
 </style>
 <br>
-<table>
+<table style="border-collapse: separate; border-spacing: 20px 1px;">
   <% @table.each_with_index do |hw, i| %>
     <tr>
       <% hw.each_with_index do |h, j| %>
