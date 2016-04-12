@@ -6,31 +6,38 @@
   border-radius: 25px;
   padding: 25px;
 }
-</style>
+.card-inverse:hover {
+  color: black ;
+  background-color: rgb(255, 153, 153);
+}</style>
 <br>
 <table style="border-collapse: separate; border-spacing: 20px 1px;">
   <% @table.each_with_index do |hw, i| %>
     <tr>
       <% hw.each_with_index do |h, j| %>
-      <td><div class="card card-inverse card-<%= @date_infos[i][j][0]%>">
+      <td>
+        <%= link_to homeworkshow_path(h) do %>
+        <div class="card card-inverse card-<%= @date_infos[i][j][0]%> ">
         <div class="card-deck">
             <!-- <blockquote class="card-blockquote "> -->
               <div class="col-sm-4 link-to-text-color", style="padding: 0px; text-align: center; ">
-                <h1> <%= @date_infos[i][j][1].to_s %> </h1>
+                <h1> <%= @date_infos[i][j][1].to_s %></h1>
                 <div >
-                <h3> <%= @date_infos[i][j][2]%> </h3>
+                <h3> <%= @date_infos[i][j][2]%></h3>
                 </div>
               </div>
               <div class="col-sm-8 link-to-text-color">
                 <h6>
-                  <p>Name: <u><%= link_to(h.name, homeworkshow_path(h), :method => :get, class: 'link-to-text-color')  %></u></p>
+                  <p>Name: <%= h.name%></p>
                   <p>Professor: <%= h.professor%></p>
                   <p>Description: <%= h.description%></p>
                 </h6>
               </div>
             <!-- </blockquote> -->
         </div>
-      </div></td>
+        </div>
+        <% end %>
+      </td>
       <% end %>
     </tr>
   <% end %>
