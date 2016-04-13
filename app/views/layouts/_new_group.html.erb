@@ -8,14 +8,13 @@
       </div>
       <div class="modal-body">
         <%= bootstrap_form_for(:group, url: group_create_path, method: :post) do |f| %>
-          <%= f.text_field :name, autofocus: true %>
-          <!-- <select class="form-control">
-            <option value=2014>2014</option>
-            <option value=2015>2015</option>
-            <option value=2016>2016</option>
-            <option value=2017>2017</option>
-            <option value=2018>2018</option>
-          </select> -->
+          <%= f.text_field :name, autofocus: true, placeholder: "Use abbreviation + number" %>
+          <%= f.form_group :year, label: { text: "Year" } do %>
+            <%= f.radio_button :year, 2016, label: "2016", checked: true %>
+            <%= f.radio_button :year, 2017, label: "2017" %>
+          <% end %>
+          <%= f.collection_select(:term, Group::TERMS, :to_s, lambda{|i| i.to_s.humanize})%>
+          <%= f.number_field :section, :min => 1, :max => 10, placeholder: "Must be an integer between 1 and 10" %>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
             <%= f.submit "Submit", class: "btn btn-primary"%>

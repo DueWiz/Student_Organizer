@@ -1,0 +1,19 @@
+<div class="modal fade" id="searchGModal" tabindex="-2" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Class Search</h4>
+      </div>
+      <div class="modal-body">
+          <%= bootstrap_form_for(:group, url: group_search_path, method: :get) do |f| %>
+            <%= f.text_field :name, autofocus: true %>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+              <%= f.submit "Submit", class: "btn btn-primary"%>
+            </div>
+          <% end %>
+      </div>
+    </div>
+  </div>
+</div>
