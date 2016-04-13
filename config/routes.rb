@@ -29,7 +29,8 @@ Rails.application.routes.draw do
   get 'homework/:id' => 'homework#show', as: :homeworkshow
   get 'homework/new'
 
-  get 'homework/edit'
+  get 'homework/:id/edit' => 'homework#edit', as: :homeworkedit
+  get 'homework/:id/update' => 'homework#update', as: :homeworkupdate
   controller :homework do
     post 'homework/create' => :create
   end

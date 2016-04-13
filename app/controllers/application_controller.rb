@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authenticate_user!, :init
 
-  helper_method :user_groups
+  helper_method :user_groups, :time_due
 
   def user_groups
     if user_signed_in?
@@ -17,6 +17,17 @@ class ApplicationController < ActionController::Base
 
   def has_latte?
       current_user.latte_account.present?
+  end
+
+  def time_due(due_date)
+      seconds = ((due_date - DateTime.now)-3600).to_i
+      sec = seconds % 60
+      minutes = seconds / 60
+      min = minutes % 60
+      hours = minutes / 60
+      hour = hours % 24
+      days = hours / 24
+      duedata = [days,hour,min]
   end
 
   def init

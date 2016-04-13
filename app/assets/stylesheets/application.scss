@@ -16,6 +16,13 @@
 .link-to-text-color {
   color: #fff
 }
+.col-sm-3 {
+    margin-right: -1px;
+}
+.table {
+  border-collapse: separate;
+  border-spacing: 10px 50px;
+}
 // Import cerulean variables
 //@import "bootswatch/flatly/variables";
 
