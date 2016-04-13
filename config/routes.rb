@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   get 'group/edit'
 
+  get 'group/search'
   controller :group do
     post 'group/create' => :create
   end
