@@ -8,7 +8,7 @@
       </div>
       <% if current_user.latte_account.nil? %>
       <div class="modal-body" id="latte_body">
-        <%= bootstrap_form_for(@latte, url: latte_create_path, method: :post, remote: true) do |f| %>
+        <%= bootstrap_form_for(@latte, url: latte_create_path, method: :post) do |f| %>
           <%= f.text_field :name, autofocus: true %>
           <%= f.password_field :password, autocomplete: "off" %>
           <%= hidden_field_tag :user_id, current_user.id %>

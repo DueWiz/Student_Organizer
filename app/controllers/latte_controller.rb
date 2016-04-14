@@ -1,12 +1,14 @@
+require 'mechanize'
 class LatteController < ApplicationController
     def create
         @latte = LatteAccount.new
         @latte.name = params["latte_account"]["name"]
         @latte.password = params["latte_account"]["password"]
+        logger.info "Post password::: #{params['latte_account']['password']}"
         @latte.user_id = params["user_id"]
         respond_to do |format|
             if @latte.save
-                format.html { redirect_to welcome_index_path, notice: 'latte completed.' }
+                format.html { redirect_to latte_info_path, task: 'refresh_latte' }
                 format.json { render json: @latte, status: :created, location: @latte }
                 format.js
             else
@@ -23,4 +25,10 @@ class LatteController < ApplicationController
          format.js { render file: "/app/views/latte/destroy"}
       end
     end
+
+    def info
+      render "latte/info"
+      LoadLatteJob.perform_later(current_user)
+    end
+
 end
