@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
       if seconds >= 0
         duedata = [days,hour,min]
       else
-        duedate = [days, 11-hour, 60-min]
+        duedate = [days, 23-hour, 60-min]
       end
   end
 

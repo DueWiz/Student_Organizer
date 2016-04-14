@@ -98,7 +98,7 @@ class HomeworkController < ApplicationController
         time_info = "Hours"
       end
     else
-      if time_remain[0] <= 0 or (time_remain[1] <= 0 and time_remain[0] == 0) or (time_remain[1] == 0 and time_remain[2] <= 0 and time_remain[0] == 0) #finish
+      if time_remain[0] <= 0  #finish
         num = 0
         card_class = "success"
         time_info = "Done"
@@ -135,7 +135,6 @@ class HomeworkController < ApplicationController
   def create
     @new = Homework.new
     @new.name = params[:homework][:name]
-    Time.zone = 'EST'
     @new.due_date = Time.zone.local(params[:homework]["due_date(1i)"].to_i,
                                  params[:homework]["due_date(2i)"].to_i,
                                  params[:homework]["due_date(3i)"].to_i,
