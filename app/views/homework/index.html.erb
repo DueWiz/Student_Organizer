@@ -1,16 +1,16 @@
+<br>
 <%= form_tag(homework_result_path, method: "get", remote: true, role: "form", class: "form", id: "special") do %>
 
-
-  <!-- <%= submit_tag "Search", class: "btn btn-default" %> -->
-
-  <div class="form-group">
-    <%= radio_button_tag(:hw_choice, "All", false, onclick: "$('#special').submit();") %>
-    <%= label_tag(:special, "All") %>
-    <%= radio_button_tag(:hw_choice, "Completed", false, onclick: "$('#special').submit(); ")%>
-    <%= label_tag(:completed, "Completed") %>
-    <%= radio_button_tag(:hw_choice, "Uncompleted",true, onclick: "$('#special').submit();")%>
-    <%= label_tag(:completed, "Uncompleted") %>
-    <div class="input-group">
+  <div class="form-group row">
+    <div class = "col-xs-7" >
+      <%= radio_button_tag(:hw_choice, "All", false, onclick: "$('#special').submit();") %>
+      <%= label_tag(:special, "All") %>
+      <%= radio_button_tag(:hw_choice, "Completed", false, onclick: "$('#special').submit(); ")%>
+      <%= label_tag(:completed, "Completed") %>
+      <%= radio_button_tag(:hw_choice, "Uncompleted",true, onclick: "$('#special').submit();")%>
+      <%= label_tag(:completed, "Uncompleted") %>
+  </div>
+    <div class="input-group col-xs-4">
       <%= text_field_tag :search, params[:search], onchange: "$('#special').submit();", class: "form-control input-xs", placeholder: "Search Homework..." %>
       <div class="input-group-addon">
         <button type="submit" class="btn btn-primary btn-sm" style="background-color: #18bc9c">
@@ -20,7 +20,6 @@
     </div>
   </div>
 <% end %>
-<br>
 <div id="search_results">
 <style>
 .card-inverse {
@@ -35,37 +34,5 @@
 }</style>
 
 <div id = "hw_result" >
-  <table style="border-collapse: separate; border-spacing: 20px 1px;">
-    <% @table.each_with_index do |hw, i| %>
-      <tr>
-        <% hw.each_with_index do |h, j| %>
-        <td>
-          <%= link_to homeworkshow_path(h) do %>
-          <div class="card card-inverse card-<%= @date_infos[i][j][0]%> ">
-          <div class="card-deck">
-              <!-- <blockquote class="card-blockquote "> -->
-                <div class="col-sm-4 link-to-text-color">
-                  <h1 style="text-align: center; "> <%= @date_infos[i][j][1].to_s %></h1>
-                  <div style="padding: 0px; margin: 0px;">
-                  <h4 > <%= @date_infos[i][j][2]%></h4>
-                  </div>
-                </div>
-                <div class="col-sm-8 link-to-text-color">
-                  <h6>
-                    <p>Name: <%= h.name%></p>
-                    <p>Professor: <%= h.professor%></p>
-                    <p>Description: <%= h.description%></p>
-                  </h6>
-                </div>
-              <!-- </blockquote> -->
-          </div>
-          </div>
-          <% end %>
-        </td>
-        <% end %>
-      </tr>
-    <% end %>
-  </table>
-</div>
-
+  <%= render "homework/search_result" %>
 </div>
