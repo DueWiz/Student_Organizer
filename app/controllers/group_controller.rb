@@ -33,7 +33,6 @@ class GroupController < ApplicationController
   end
 
   def show
-    puts "****** I am here!! #{params.inspect}"
     @group = Group.find_by_id(params[:id])
   end
 
