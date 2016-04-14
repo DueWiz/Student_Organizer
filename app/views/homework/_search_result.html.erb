@@ -1,30 +1,3 @@
-
-<%= form_tag(homework_result_path, method: "get", remote: true, role: "form", class: "form-inline", id: "special") do %>
-  <div class="form-group">
-
-    <!-- <%= radio_button_tag(:hw_choice, "All", onclick: "$('#special').submit();")%>
-    <%= label_tag(:special, "All") %>
-    <%= radio_button_tag(:hw_choice, "All", onclick: "$('#special').submit();")%>
-    <%= label_tag(:special, "Spe") %> -->
-
-
-    <!-- <%= radio_button_tag(:hw_choice, "Completed", onclick: "$('#special').submit();")%>
-    <%= label_tag(:completed, "Completed") %>
-    <%= radio_button_tag(:hw_choice, "Uncompleted", onclick: "$('#special').submit();")%>
-    <%= label_tag(:completed, "Uncompleted") %> -->
-
-    <div class="input-group">
-      <%= text_field_tag :search, params[:search], onchange: "$('#special').submit();", class: "form-control input-xs", placeholder: "Search Homework..." %>
-      <div class="input-group-addon">
-      <%= link_to homework_result_path do %>
-          <i class="fa fa-search"></i>
-      <% end %>
-      </div>
-    </div>
-  </div>
-<% end %>
-<br>
-<div id="search_results">
 <style>
 .card-inverse {
   height: 200px;
@@ -69,6 +42,4 @@
       </tr>
     <% end %>
   </table>
-</div>
-
 </div>

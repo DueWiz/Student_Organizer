@@ -18,7 +18,9 @@ class HomeworkController < ApplicationController
     #     @hws[hw.homework_id] = [temp, hw, timeLeft]
     #   end
     # end
+    params[:hw_choice] == "Uncompleted"
     @my_hw = current_user.homeworks.order(:due_date)
+    @my_hw = not_due(@my_hw)
     @table = Array.new
     @date_infos = Array.new
     index = 0
@@ -38,6 +40,51 @@ class HomeworkController < ApplicationController
     end
   end
 
+  def result
+    @my_hw = current_user.homeworks.order(:due_date)
+    # if params[:hw_choice] == "All"
+    #   @my_hw = current_user.homeworks.order(:due_date)
+    # elsif params[:hw_choice] == "Uncompleted"
+    #   @my_hw = not_due(@my_hw)
+    # elsif params[:hw_choice] == "Completed"
+    #   @my_hw = already_due(@my_hw)
+    # end
+    if not params[:search].nil?
+      @my_hw = @my_hw.where("name LIKE ?", "%#{params[:search]}%")
+    end
+    @table = Array.new
+    @date_infos = Array.new
+    index = 0
+    count = 0
+    @my_hw.each do |hw|
+      if count == 0
+        @table[index] = Array.new
+        @date_infos[index] = Array.new
+      end
+      @table[index] += [hw]
+      @date_infos[index] += [display_date_info(hw)]
+      count += 1
+      if count == 3
+        index += 1
+        count = 0
+      end
+    end
+    # respond_to do |format|
+    #   format.js
+    # end
+  end
+
+
+
+  def not_due(hws)
+    hws = hws.to_a
+    hws.delete_if {|hw| (time_due(hw.due_date)[0] < 0 or time_due(hw.due_date)[1] < 0 or time_due(hw.due_date)[2] < 0)}
+  end
+
+  def already_due(hws)
+    hws = hws.to_a
+    hws.delete_if {|hw| (time_due(hw.due_date)[0] > 0 and time_due(hw.due_date)[1] > 0 and time_due(hw.due_date)[2] > 0)}
+  end
   def display_date_info (hw)
     time_remain = time_due(hw.due_date)
     if time_remain[0] == 0 and time_remain[1]>=0 and time_remain[2]>=0
