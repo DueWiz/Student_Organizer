@@ -8,14 +8,13 @@
 #
 # test:
 #   adapter: async
-# local: &local
-#   url: redis://localhost:6379
-#   host: localhost
-#   port: 6379
-#   timeout: 100
-#   inline: true
-# development: *local
-# test: *local
+development: &development
+  url: redis://localhost:6379
+  host: localhost
+  port: 6379
+  timeout: 100
+  inline: true
+test: *development
 
 production: &production
   :url: redis://redistogo:efedf4614c6c9b98667075aea4bbaa4e@hoki.redistogo.com:9079/
