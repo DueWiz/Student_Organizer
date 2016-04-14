@@ -2,17 +2,54 @@
 <% if not @group.nil? %>
 
 <div class="col-sm-12">
-  <div class="card-header link-to-text-color" style="background-color: #2c3e50;">
+  <div class="card-header link-to-text-color" style="background-color: #2c3e50; width:110%">
     <h2><%= @group.year.to_s + "-" + @group.term + "-"+ @group.name + "-Section " + @group.section.to_s%></h2>
   </div>
-    <div class="card card-block">
-      <table class = "table">
-        <tbody>
-
-        </tbody>
-      </table>
-    </div>
-  <%= %>
 </div>
 
+<style>
+.card-inverse {
+  height: 200px;
+  width: 300px;
+  border-radius: 25px;
+  padding: 25px;
+}
+.card-inverse:hover {
+  color: black ;
+  background-color: rgb(255, 153, 153);
+}</style>
+
+<div id = "hw_result" >
+  <table style="border-collapse: separate; border-spacing: 20px 1px;">
+    <% @table.each_with_index do |hw, i| %>
+      <tr>
+        <% hw.each_with_index do |h, j| %>
+        <td>
+          <%= link_to homeworkshow_path(h) do %>
+          <div class="card card-inverse card-<%= @date_infos[i][j][0]%> ">
+          <div class="card-deck">
+              <!-- <blockquote class="card-blockquote "> -->
+                <div class="col-sm-4 link-to-text-color">
+                  <h1 style="text-align: center; "> <%= @date_infos[i][j][1].to_s %></h1>
+                  <div style="padding: 0px; margin: 0px;">
+                  <h5> <%= @date_infos[i][j][2]%></h5>
+                  </div>
+                </div>
+                <div class="col-sm-8 link-to-text-color">
+                  <h6>
+                    <p>Name: <%= h.name%></p>
+                    <p>Professor: <%= h.professor%></p>
+                    <p>Description: <%= h.description%></p>
+                  </h6>
+                </div>
+              <!-- </blockquote> -->
+          </div>
+          </div>
+          <% end %>
+        </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+</div>
 <% end %>
