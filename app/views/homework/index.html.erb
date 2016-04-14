@@ -16,9 +16,9 @@
     <div class="input-group">
       <%= text_field_tag :search, params[:search], onchange: "$('#special').submit();", class: "form-control input-xs", placeholder: "Search Homework..." %>
       <div class="input-group-addon">
-      <%= link_to homework_result_path do %>
+        <button type="submit" class="btn btn-primary btn-sm" style="background-color: #18bc9c">
           <i class="fa fa-search"></i>
-      <% end %>
+        </button>
       </div>
     </div>
   </div>
