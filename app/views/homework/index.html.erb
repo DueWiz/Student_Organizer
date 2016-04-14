@@ -1,14 +1,15 @@
 <%= form_tag(homework_result_path, method: "get", remote: true, role: "form", class: "form", id: "special") do %>
 
-  <%= radio_button_tag(:hw_choice, "All")%>
-  <%= label_tag(:special, "All") %>
-  <%= radio_button_tag(:hw_choice, "Completed", onclick: "$('#special').submit();")%>
-  <%= label_tag(:completed, "Completed") %>
-  <%= radio_button_tag(:hw_choice, "Uncompleted", onclick: "$('#special').submit();")%>
-  <%= label_tag(:completed, "Uncompleted") %>
+
   <!-- <%= submit_tag "Search", class: "btn btn-default" %> -->
 
   <div class="form-group">
+    <%= radio_button_tag(:hw_choice, "All", false, onclick: "$('#special').submit();") %>
+    <%= label_tag(:special, "All") %>
+    <%= radio_button_tag(:hw_choice, "Completed", false, onclick: "$('#special').submit(); ")%>
+    <%= label_tag(:completed, "Completed") %>
+    <%= radio_button_tag(:hw_choice, "Uncompleted",true, onclick: "$('#special').submit();")%>
+    <%= label_tag(:completed, "Uncompleted") %>
     <div class="input-group">
       <%= text_field_tag :search, params[:search], onchange: "$('#special').submit();", class: "form-control input-xs", placeholder: "Search Homework..." %>
       <div class="input-group-addon">
