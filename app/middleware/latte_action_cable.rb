@@ -1,4 +1,4 @@
-class LatteActionCable  
+class LatteActionCable
   def initialize(app, options={})
     @app = app
   end
@@ -10,4 +10,4 @@ class LatteActionCable
       @app.call(env)
     end
   end
-end  
+end
