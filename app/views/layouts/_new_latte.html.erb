@@ -6,7 +6,8 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">Subscribe Latte</h4>
       </div>
-      <div class="modal-body">
+      <% if current_user.latte_account.nil? %>
+      <div class="modal-body" id="latte_body">
         <%= bootstrap_form_for(@latte, url: latte_create_path, method: :post) do |f| %>
           <%= f.text_field :name, autofocus: true %>
           <%= f.password_field :password, autocomplete: "off" %>
@@ -17,6 +18,17 @@
           </div>
         <% end %>
       </div>
+      <% else %>
+      <div class="modal-body" id="latte_body">
+        <%= bootstrap_form_for(current_user.latte_account, url: latte_destroy_path, method: :delete, remote: true) do |f| %>
+          <p>Do you want to unsubscribe Latte?</p>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <%= f.submit "Confirm", class: "btn btn-primary"%>
+          </div>
+        <% end %>
+      </div>
+      <% end %>
     </div>
   </div>
 </div>

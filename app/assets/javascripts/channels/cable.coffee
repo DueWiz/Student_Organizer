@@ -5,7 +5,7 @@
 #
 #= require action_cable
 #= require_self
-#= require_tree ./channels
+#= require_tree .
 #
-# @App ||= {}
-# App.cable = ActionCable.createConsumer()
+@App ||= {}
+App.cable = ActionCable.createConsumer('ws://localhost:28080/')

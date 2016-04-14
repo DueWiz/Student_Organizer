@@ -15,3 +15,5 @@
 //= require jquery_ujs
 //= require_tree .
 //= require bootstrap-datepicker
+//= require latte
+//= require_tree ./channels
