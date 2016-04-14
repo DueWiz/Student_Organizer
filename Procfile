@@ -1,2 +1,2 @@
-web: bundle exec puma -p 3000  ./config.ru
+web: bundle exec puma -C config/puma.rb
 sidekiq: bundle exec sidekiq
