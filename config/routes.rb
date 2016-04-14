@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+  get 'homework/result'
   post 'latte/create'
 
   get 'group/:id' => 'group#show', as: :groupshow
