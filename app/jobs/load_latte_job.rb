@@ -17,13 +17,24 @@ class LoadLatteJob < ApplicationJob
     ActionCable.server.broadcast "latte_info_#{current_user.id}", latte_info: 'Logged in'
 
 
-
-
+    hw_count = 0
     page.links_with(css: "a.course_show").each do |link|
       if link.text =~ /^161/
         course_page = link.click
         course_page.links_with(css: "li.assign div.activityinstance a").each do |a_link|
+          hw_count += 1
+        end
+      end
+    end
+    ActionCable.server.broadcast "latte_info_#{current_user.id}", latte_info: "Expect to load #{hw_count} items."
+    hw_count2 = 0
+    page.links_with(css: "a.course_show").each do |link|
+      if link.text =~ /^161/
+        course_page = link.click
+        course_page.links_with(css: "li.assign div.activityinstance a").each do |a_link|
+          hw_count2 += 1
           assignment_page = a_link.click
+          ActionCable.server.broadcast "latte_info_#{current_user.id}", latte_info: "Now loading #{hw_count2}/#{hw_count} items."
           a_title = assignment_page.xpath("//div[@role='main']/h2/text()")
           ActionCable.server.broadcast "latte_info_#{current_user.id}", latte_info: "#{a_title}"
           a_sub_status = assignment_page.xpath("//td[contains(., 'Submission status')]/following-sibling::td/text()")
@@ -31,6 +42,7 @@ class LoadLatteJob < ApplicationJob
           a_due_date = assignment_page.xpath("//td[contains(., 'Due date')]/following-sibling::td/text()")
           ActionCable.server.broadcast "latte_info_#{current_user.id}", latte_info: "#{a_due_date}"
           ActionCable.server.broadcast "latte_info_#{current_user.id}", latte_info: "Entered assignment page"
+          ActionCable.server.broadcast "latte_info_#{current_user.id}", latte_info: "<br/>"
         end
       end
     end
