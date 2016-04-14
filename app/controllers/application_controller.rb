@@ -20,14 +20,18 @@ class ApplicationController < ActionController::Base
   end
 
   def time_due(due_date)
-      seconds = ((due_date - DateTime.now)-3600).to_i
+      seconds = ((due_date - DateTime.now)).to_i
       sec = seconds % 60
       minutes = seconds / 60
       min = minutes % 60
       hours = minutes / 60
       hour = hours % 24
       days = hours / 24
-      duedata = [days,hour,min]
+      if seconds >= 0
+        duedata = [days,hour,min]
+      else
+        duedate = [days, 11-hour, 60-min]
+      end
   end
 
   def init
