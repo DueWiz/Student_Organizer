@@ -16,3 +16,11 @@ local: &local
   inline: true
 development: *local
 test: *local
+
+production: &production
+  :url: redis://redistogo:efedf4614c6c9b98667075aea4bbaa4e@hoki.redistogo.com:9079/
+  :host: hoki.redistogo.com
+  :port: 9079
+  :password: efedf4614c6c9b98667075aea4bbaa4e
+  :inline: true
+  :timeout: 10
