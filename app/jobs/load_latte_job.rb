@@ -34,17 +34,31 @@ class LoadLatteJob < ApplicationJob
         course_page.links_with(css: "li.assign div.activityinstance a").each do |a_link|
           hw_count2 += 1
           assignment_page = a_link.click
+          #Create HW
+          h = Homework.new
+          #Associations with User
+          u_h = UserHomework.new
+          u_h.user_id = current_user.id
+          #Homework stats
           ActionCable.server.broadcast "latte_info_#{current_user.id}", latte_info: "Now loading #{hw_count2}/#{hw_count} items."
           a_title = assignment_page.xpath("//div[@role='main']/h2/text()")
+          h.name = a_title.to_s
           ActionCable.server.broadcast "latte_info_#{current_user.id}", latte_info: "#{a_title}"
           a_sub_status = assignment_page.xpath("//td[contains(., 'Submission status')]/following-sibling::td/text()")
+          u_h.status = a_sub_status.to_s
           ActionCable.server.broadcast "latte_info_#{current_user.id}", latte_info: "#{a_sub_status}"
           a_due_date = assignment_page.xpath("//td[contains(., 'Due date')]/following-sibling::td/text()")
+          unless a_due_date.to_s == ""
+            h.due_date = DateTime.parse(a_due_date.to_s)
+          end
           ActionCable.server.broadcast "latte_info_#{current_user.id}", latte_info: "#{a_due_date}"
-          ActionCable.server.broadcast "latte_info_#{current_user.id}", latte_info: "Entered assignment page"
-          ActionCable.server.broadcast "latte_info_#{current_user.id}", latte_info: "<br/>"
+          h.save
+          u_h.homework_id = h.id
+          u_h.save
+          ActionCable.server.broadcast "latte_info_#{current_user.id}", latte_info: "Finished current assignment page"
         end
       end
     end
+    ActionCable.server.broadcast "latte_info_#{current_user.id}", latte_info: '<br/><a href="/">Back</a>'
   end
 end
