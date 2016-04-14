@@ -1,2 +1,2 @@
-web: bundle exec puma -C config/puma.rb
+bundle exec puma -p $PORT 
 sidekiq: bundle exec sidekiq

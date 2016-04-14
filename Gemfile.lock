@@ -84,7 +84,11 @@ GEM
       unf (>= 0.0.5, < 1.0.0)
     encryptor (3.0.0)
     erubis (2.7.0)
+    eventmachine (1.0.8)
     execjs (2.6.0)
+    faye-websocket (0.10.2)
+      eventmachine (>= 0.12.0)
+      websocket-driver (>= 0.5.1)
     ffi (1.9.10)
     font-awesome-rails (4.5.0.1)
       railties (>= 3.2, < 5.1)
@@ -240,6 +244,7 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.1.0)
   devise!
+  faye-websocket
   font-awesome-rails
   foreman
   jbuilder (~> 2.0)

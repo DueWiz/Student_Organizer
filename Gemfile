@@ -43,6 +43,8 @@ gem "attr_encrypted", '~> 3.0.1'
 
 gem 'sidekiq'
 
+gem 'faye-websocket'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
