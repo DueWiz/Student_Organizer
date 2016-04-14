@@ -20,17 +20,14 @@ class GroupController < ApplicationController
   end
 
   def join
-      newGroup = UserGroup.create(user_id: current_user.id, group_id: params[:id])
-      newGroup.save!
-      Homework.where(group_id: params[:id]).find_each do |hw|
-
-
+      newGroup = GroupUser.create(user_id: current_user.id, group_id: params[:group_id])
+      Homework.where(group_id: params[:group_id]).find_each do |hw|
+        UserHomework.create(user_id: current_user.id, homework_id: hw.id, admin: true)
       end
-
+      redirect_to groupshow_path(params[:group_id])
   end
 
   def search
-    logger.info "test for search"
     @result = Group.where(['name LIKE ?', "%#{params[:group][:name]}%"]).all.order(:name, :term, :year, :section)
 
   end

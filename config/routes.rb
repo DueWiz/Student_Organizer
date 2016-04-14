@@ -6,6 +6,10 @@ Rails.application.routes.draw do
 
   delete 'latte/destroy'
 
+  get 'homework/result'
+
+  get 'group/search'
+
   get 'group/:id' => 'group#show', as: :groupshow
 
   get 'user_homework/index'
@@ -16,12 +20,13 @@ Rails.application.routes.draw do
 
   get 'group/edit'
 
-  get 'group/search'
   controller :group do
     post 'group/create' => :create
+    post 'group/join' => :join
   end
   get 'group/create'
   get 'group/update'
+  get 'group/join'
 
   get 'group/destroy'
 

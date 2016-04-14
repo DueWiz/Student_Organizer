@@ -18,7 +18,9 @@ class HomeworkController < ApplicationController
     #     @hws[hw.homework_id] = [temp, hw, timeLeft]
     #   end
     # end
+    params[:hw_choice] == "Uncompleted"
     @my_hw = current_user.homeworks.order(:due_date)
+    @my_hw = @my_hw.where("due_date > ?", DateTime.now)
     @table = Array.new
     @date_infos = Array.new
     index = 0
@@ -38,6 +40,40 @@ class HomeworkController < ApplicationController
     end
   end
 
+  def result
+    @my_hw = current_user.homeworks.order(:due_date)
+    if params[:hw_choice] == "All"
+      @my_hw = current_user.homeworks.order(:due_date)
+    elsif params[:hw_choice] == "Uncompleted"
+      @my_hw = @my_hw.where("due_date > ?", DateTime.now)
+    elsif params[:hw_choice] == "Completed"
+      @my_hw = @my_hw.where("due_date < ?", DateTime.now)
+    end
+    if not params[:search].nil?
+      @my_hw = @my_hw.where("name LIKE ?", "%#{params[:search]}%")
+    end
+    @table = Array.new
+    @date_infos = Array.new
+    index = 0
+    count = 0
+    @my_hw.each do |hw|
+      if count == 0
+        @table[index] = Array.new
+        @date_infos[index] = Array.new
+      end
+      @table[index] += [hw]
+      @date_infos[index] += [display_date_info(hw)]
+      count += 1
+      if count == 3
+        index += 1
+        count = 0
+      end
+    end
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def display_date_info (hw)
     time_remain = time_due(hw.due_date)
     if time_remain[0] == 0 and time_remain[1]>=0 and time_remain[2]>=0
@@ -51,7 +87,7 @@ class HomeworkController < ApplicationController
         time_info = "Hours"
       end
     else
-      if time_remain[0] <= 0 or (time_remain[1] <= 0 and time_remain[0] == 0) or (time_remain[1] == 0 and time_remain[2] <= 0 and time_remain[0] == 0) #finish
+      if time_remain[0] <= 0  #finish
         num = 0
         card_class = "success"
         time_info = "Done"
@@ -88,7 +124,6 @@ class HomeworkController < ApplicationController
   def create
     @new = Homework.new
     @new.name = params[:homework][:name]
-    Time.zone = 'EST'
     @new.due_date = Time.zone.local(params[:homework]["due_date(1i)"].to_i,
                                  params[:homework]["due_date(2i)"].to_i,
                                  params[:homework]["due_date(3i)"].to_i,
