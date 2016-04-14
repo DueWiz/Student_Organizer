@@ -1,1 +1,28 @@
-<%= @result.count %>
+<h1>Search Result </h1>
+
+<table class="table", style="border-collapse: separate; border-spacing: 20px 1px;">
+  <thead>
+    <tr>
+      <th>Class Name</th>
+      <th>Year</th>
+      <th>Term</th>
+      <th>Section</th>
+      <th>Your Status</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @result.each do |r| %>
+      <tr>
+        <td><%= r.name %></td>
+        <td><%= r.year %></td>
+        <td><%= r.term %></td>
+        <td><%= r.section %></td>
+        <td><%= link_to 'Join Now', {:controller => "group",
+                          :action => "join",
+                          :group_id => r.id},
+                          :method => "post", class: "btn btn-info btn-sm", style: "background-color: #18bc9c"%></td>
+      </tr>
+   <% end %>
+  </tbody>
+</table>

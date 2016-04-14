@@ -15,7 +15,7 @@
       <%= @due[0] %> days, <%= @due[1] %> hours, <%= @due[2]%> minutes left.
     <% else %>
       <div class="alert alert-danger" role="alert">
-        Warning! Your assignment is already past due by <%= -@due[0] %> days, <%= @due[1] %> hours, <%= @due[2]%> minutes.
+        Warning! Your assignment is already past due by <%= -(@due[0]+1) %> days, <%= @due[1] %> hours, <%= @due[2]%> minutes.
       </div>
     <% end %>
   </div>
