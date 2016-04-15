@@ -1,3 +1,7 @@
-<%= bootstrap_calendar Date.today {} do |date|
+<%=
+bootstrap_calendar Date.today do |date|
+  content_tag :span, class: "pull-right", "data-cal-date" => "some", "data-cal-view" => "day" do
     date.day.to_s
-end %>
+  end
+end
+%>
