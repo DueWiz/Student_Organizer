@@ -11,11 +11,10 @@
  * It is generally better to create a new file per style scope.
  
  *= require_self
- *= require bootstrap_and_overrides
  *= require_tree
  *= require_calendar
  */
- 
+
  //Using 'Flatly' bootswatch
 
 .link-to-text-color {
