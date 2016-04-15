@@ -1,5 +1,11 @@
 source 'https://rubygems.org'
 
+gem "therubyracer"
+
+gem "less-rails" 
+
+gem "bootstrap_calendar_rails"
+
 gem 'pundit', '~> 1.1'
 
 gem 'rails_12factor', group: :production
