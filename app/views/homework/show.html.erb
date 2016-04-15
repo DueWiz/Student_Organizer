@@ -6,7 +6,7 @@
   <div class="container">
 <p><a href="#due" class="btn btn-info btn-sm" data-toggle="collapse">Due Date:</a>
   <div id="due" class="collapse.in">
-    <%= @this_hw.due_date %>
+    <%= @this_hw.due_date.to_formatted_s(:rfc822)[0...-6]  %>
   </div>
 </p>
 <p><a href="#daystodue" class="btn btn-info btn-sm" data-toggle="collapse">Time Left:</a>
