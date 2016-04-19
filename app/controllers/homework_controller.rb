@@ -73,7 +73,7 @@ class HomeworkController < ApplicationController
       format.js
     end
   end
-  
+
   def new
   end
 
@@ -111,6 +111,7 @@ class HomeworkController < ApplicationController
     @this_hw = Homework.find_by_id(params[:id])
     @due = time_due(@this_hw.due_date)
     @this_userhw = current_user.user_homeworks.find_by_homework_id(params[:id])
+    @date_info = display_date_info(@this_hw)
   end
 
   def update
