@@ -49,7 +49,9 @@ class LoadLatteJob < ApplicationJob
           ActionCable.server.broadcast "latte_info_#{current_user.id}", latte_info: "#{a_sub_status}"
           a_due_date = assignment_page.xpath("//td[contains(., 'Due date')]/following-sibling::td/text()")
           unless a_due_date.to_s == ""
-            h.due_date = DateTime.parse(a_due_date.to_s)
+            estHoursOffset = -5
+            estOffset = Rational(estHoursOffset, 24)
+            h.due_date = (DateTime.parse(a_due_date.to_s) - (estHoursOffset/24.0)).new_offset(estOffset)
           end
           ActionCable.server.broadcast "latte_info_#{current_user.id}", latte_info: "#{a_due_date}"
           h.save
