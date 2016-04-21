@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authenticate_user!, :init
 
-  helper_method :user_groups, :time_due
+  helper_method :user_groups, :time_due, :display_date_info
 
   def user_groups
     if user_signed_in?
@@ -33,6 +33,37 @@ class ApplicationController < ActionController::Base
         duedate = [days, 23-hour, 60-min]
       end
   end
+
+  def display_date_info (hw)
+    time_remain = time_due(hw.due_date)
+    if time_remain[0] == 0 and time_remain[1]>=0 and time_remain[2]>=0
+      if time_remain[1] == 0 # min
+        num = time_remain[2]
+        card_class = "danger"
+        time_info = "Mins"
+      else
+        num = time_remain[1] #hour
+        card_class = "warning"
+        time_info = "Hours"
+      end
+    else
+      if time_remain[0] <= 0  #finish
+        num = 0
+        card_class = "success"
+        time_info = "Done"
+      else
+        num = time_remain[0]
+        time_info = "Days"
+        if time_remain[0] < 7
+          card_class = "info"
+        else
+          card_class = "primary"
+        end
+      end
+    end
+    date_info = [card_class, num, time_info]
+  end
+
 
   def init
       @homework = Homework.new

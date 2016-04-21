@@ -6,7 +6,10 @@
     <h4>Classes</h4>
     </div>
     <div class="col-sm-7">
-      <button type="button" class="btn btn-sm btn-success float-shadow"  data-toggle="modal" data-target="#searchGModal" style = "background-color: #18bc9c">Search</button>
+      <%= form_tag(group_search_path, method: "get", role: "form", class: "form", id: "groupSearch") do %>
+      <%= text_field_tag :name, params[:name], onchange: "$('#groupSearch').submit();", class: "form-control input-xs", placeholder: "Search...", style: "border-radius:15px; height: 35px;" %>
+      <% end %>
+      <!-- <button type="button" class="btn btn-sm btn-success float-shadow"  data-toggle="modal" data-target="#searchGModal" style = "background-color: #18bc9c">Search</button> -->
     <!-- <div class="col-sm-7">
       <div class="input-group">
         <input type="text" class="form-control" placeholder="Find Classes" style="border-radius:15px; height: 35px;">
