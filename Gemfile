@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem "simple_calendar", "~> 2.1", :github => 'excid3/simple_calendar', :branch => 'master'
+
 gem 'pundit', '~> 1.1'
 
 gem 'rails_12factor', group: :production
