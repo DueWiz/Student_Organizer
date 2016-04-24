@@ -1,3 +1,12 @@
 // Place all the styles related to the latte controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#latte_spinner.invi {
+    display: none;
+}
+
+#latte_alert {
+    position: fixed;
+    right: 20px;
+}
