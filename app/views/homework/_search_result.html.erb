@@ -29,7 +29,11 @@
                 <div class="col-sm-8 link-to-text-color">
                   <h6>
                     <p>Name: <%= h.name%></p>
-                    <p>Professor: <%= h.professor%></p>
+                    <p>Class:
+                      <% if not h.group_id.nil? %>
+                        <%= Group.find_by_id(h.group_id).name %>
+                      <% end%>
+                    </p>
                     <p>Description: <%= h.description%></p>
                   </h6>
                 </div>

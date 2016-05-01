@@ -28,12 +28,30 @@ class GroupController < ApplicationController
   end
 
   def search
-    @result = Group.where(['name LIKE ?', "%#{params[:group][:name]}%"]).all.order(:name, :term, :year, :section)
-
+    @result = Group.where(['name LIKE ?', "%#{params[:name]}%"]).all.order(:name, :term, :year, :section)
+    @relation = GroupUser.all
   end
 
   def show
     @group = Group.find_by_id(params[:id])
+    hws = Homework.where('group_id = ?', @group.id).order(:due_date)
+    @table = Array.new
+    @date_infos = Array.new
+    index = 0
+    count = 0
+    hws.each do |hw|
+      if count == 0
+        @table[index] = Array.new
+        @date_infos[index] = Array.new
+      end
+      @table[index] += [hw]
+      @date_infos[index] += [display_date_info(hw)]
+      count += 1
+      if count == 3
+        index += 1
+        count = 0
+      end
+    end
   end
 
   def create
