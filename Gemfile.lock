@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/excid3/simple_calendar.git
+  revision: 05fce0fad96d7bb34204fc241472adc4381470b0
+  branch: master
+  specs:
+    simple_calendar (2.1.0)
+      rails (>= 3.0)
+
+GIT
   remote: git://github.com/plataformatec/devise.git
   revision: 69bee06ceee6280b54304928bb6e55c5064abad8
   branch: master
@@ -256,6 +264,7 @@ DEPENDENCIES
   redis
   sass-rails (~> 5.0)
   sidekiq
+  simple_calendar (~> 2.1)!
   spring
   spring-watcher-listen (~> 2.0.0)
   sprockets-rails
