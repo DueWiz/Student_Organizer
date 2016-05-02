@@ -1,5 +1,5 @@
 <%= month_calendar attribute: :due_date, events: @homeworks do |date, homeworks| %>
-  <%= date %>
+  <%= date.day %>
 
   <% homeworks.each do |homework| %>
     <div>
