@@ -9,12 +9,6 @@
       <%= form_tag(group_search_path, method: "get", role: "form", class: "form", id: "groupSearch") do %>
       <%= text_field_tag :name, params[:name], onchange: "$('#groupSearch').submit();", class: "form-control input-xs", placeholder: "Search...", style: "border-radius:15px; height: 35px;" %>
       <% end %>
-      <!-- <button type="button" class="btn btn-sm btn-success float-shadow"  data-toggle="modal" data-target="#searchGModal" style = "background-color: #18bc9c">Search</button> -->
-    <!-- <div class="col-sm-7">
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Find Classes" style="border-radius:15px; height: 35px;">
-      </div>
-    -->
     </div>
   </div>
   </div>
@@ -22,7 +16,7 @@
     <table class="table table-condense table-hover" style="border-spacing: 0px 0px;">
       <% user_groups.each do |group| %>
         <tr>
-          <td><%= link_to group.name, groupshow_path(group) %></td>
+          <td><%= link_to group.year.to_s + "-" + group.term + "-" + group.name + "-" + group.section.to_s, groupshow_path(group) %></td>
         <tr>
       <% end %>
     </table>
