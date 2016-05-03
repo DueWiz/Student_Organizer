@@ -102,7 +102,9 @@ class HomeworkController < ApplicationController
                                  params[:homework]["due_date(5i)"].to_i,)
     @new.description = params[:homework][:description]
     thisGroup = Group.find_by_id(params[:group])
-    @new.group_id = thisGroup.id
+    if thisGroup != nil
+      @new.group_id = thisGroup.id
+    end
     @new.save!
     UserHomework.create(user_id: current_user.id, homework_id: @new.id, admin: true)
     redirect_to homework_url

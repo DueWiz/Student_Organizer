@@ -39,8 +39,13 @@ class GroupController < ApplicationController
   end
 
   def show
-    @group = Group.find_by_id(params[:id])
-    hws = Homework.where('group_id = ?', @group.id).order(:due_date)
+    if params[:id] == "-1"
+      myhws = getMyHw
+      hws = myhws.where(group_id: nil)
+    else
+      @group = Group.find_by_id(params[:id])
+      hws = Homework.where('group_id = ?', @group.id).order(:due_date)
+    end
     @table = Array.new
     @date_infos = Array.new
     index = 0
