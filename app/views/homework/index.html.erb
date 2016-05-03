@@ -19,6 +19,9 @@
       </div>
     </div>
   </div>
+  <% if current_user.latte_account != nil %>
+    <div class="alert alert-warning" role="alert">Reminder: you haven't subscribed Latte and you can do it anytime through the button on the top.</div>
+  <% end %>
 <% end %>
 <div id="search_results">
 <style>
