@@ -19,6 +19,7 @@ class LoadLatteJob < ApplicationJob
       group_user.user_id = current_user.id
       group_user.group_id = group.id
       group_user.save
+      return group.id
   end
 
   def perform(current_user)
@@ -38,9 +39,9 @@ class LoadLatteJob < ApplicationJob
     ActionCable.server.broadcast "latte_info_#{current_user.id}", bar_status: 'Logged in'
 
     hw_count = 0
+    group_id = nil
     page.links_with(css: "a.course_show").each do |link|
       if link.text =~ /^161/
-        create_group(link.text,current_user)
         course_page = link.click
         course_page.links_with(css: "li.assign div.activityinstance a").each do |a_link|
           hw_count += 1
@@ -53,12 +54,17 @@ class LoadLatteJob < ApplicationJob
     ActionCable.server.broadcast "latte_info_#{current_user.id}", progress: "#{hw_count2}/#{hw_count} items"
     page.links_with(css: "a.course_show").each do |link|
       if link.text =~ /^161/
+        group_id = create_group(link.text,current_user)
         course_page = link.click
         course_page.links_with(css: "li.assign div.activityinstance a").each do |a_link|
           hw_count2 += 1
           assignment_page = a_link.click
           #Create HW
           h = Homework.new
+
+          #link group_id
+          h.group_id = group_id
+
           #Associations with User
           u_h = UserHomework.new
           u_h.user_id = current_user.id
