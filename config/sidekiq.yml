@@ -4,10 +4,9 @@
 # pick it up automatically.
 ---
 :verbose: false
-:concurrency: 10
 
 # Set timeout to 8 on Heroku, longer if you manage your own systems.
-:timeout: 30
+:timeout: 8
 
 # Sidekiq will run this file through ERB when reading it so you can
 # even put in dynamic logic, like a host-specific queue.
