@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authenticate_user!, :init
 
-  helper_method :user_groups, :time_due, :display_date_info
+  helper_method :user_groups, :time_due, :display_date_info, :getMyHw
 
   def user_groups
     if user_signed_in?
@@ -64,6 +64,14 @@ class ApplicationController < ActionController::Base
     date_info = [card_class, num, time_info]
   end
 
+  def getMyHw
+    myhomework = current_user.user_homeworks
+    myhwArray = Array.new
+    myhomework.each do |hw|
+      myhwArray.push(hw.homework_id)
+    end
+    homeworks = Homework.where(id: myhwArray)
+  end
 
   def init
       @homework = Homework.new

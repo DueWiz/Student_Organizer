@@ -1,11 +1,14 @@
 <br>
-<% if not @group.nil? %>
-    <h2><%= @group.year.to_s + "-" + @group.term + "-"+ @group.name + "-Section " + @group.section.to_s%>
-    <td><%= link_to 'Quit the group', {:controller => "group",
-                                       :action => "destroy",
-                                       :id => @group.id}, method: 'post', class: "btn btn-primary btn-sm", style: "background-color: #18bc9c",
-                                       data: {confirm: 'Doing so will delete every homework you have under this group. Are you sure?'} %></td></h2>
-<br>
+    <% if not @group.nil? %>
+        <h2><%= @group.year.to_s + "-" + @group.term + "-"+ @group.name + "-Section " + @group.section.to_s%>
+        <td><%= link_to 'Quit the group', {:controller => "group",
+                                          :action => "destroy",
+                                          :id => @group.id}, method: 'post', class: "btn btn-primary btn-sm",
+                                          data: {confirm: 'Doing so will delete every homework you have under this group. Are you sure?'} %></td></h2>
+    <% else %>
+        <h2>My Own Homeworks</h2>
+    <% end %>
+
 <style>
 .card-inverse {
   height: 225px;
@@ -36,11 +39,13 @@
                 <div class="col-sm-7 link-to-text-color" style="padding: 4%">
                   <h6>
                     <p><ins> Name: </ins><br><%= h.name%></p>
+
+                    <% if not h.group_id.nil? %>
                     <p><ins>Class:</ins><br>
-                      <% if not h.group_id.nil? %>
                          <%= Group.find_by_id(h.group_id).name %>
-                      <% end %>
                     </p>
+                    <% end %>
+
                     <p>
                     <ins>Description:</ins><br>
                       <% if h.description == nil or h.description.length < 60 %>
@@ -51,7 +56,6 @@
                     </p>
                   </h6>
                 </div>
-              <!-- </blockquote> -->
           </div>
           </div>
           <% end %>
@@ -61,5 +65,3 @@
     <% end %>
   </table>
 </div>
-
-<% end %>
