@@ -12,22 +12,22 @@
 
   <body>
     <% if user_signed_in? %>
-    <div id="latte"><%= render "layouts/new_latte" %></div>
-    <%= render "layouts/new_group" %>
-    <%= render "layouts/new_hw" %>
-    <%= render "layouts/new_search" %>
+      <div id="latte"><%= render "layouts/new_latte" %></div>
+      <%= render "layouts/new_group" %>
+      <%= render "layouts/new_hw" %>
+      <%= render "layouts/new_search" %>
     <% end %>
     <%= render "layouts/nav_top" %>
     <div class="container-fluid">
       <% if user_signed_in? %>
-      <%= render "layouts/nav_left" %>
-      <div class="col-md-9">
+        <%= render "layouts/nav_left" %>
+        <div class="col-md-9">
       <% else %>
-      <div class="col-md-12">
+        <div class="col-md-12">
       <% end %>
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
-      <%= yield %>  
+      <%= yield %>
       </div>
     </div>
   </body>

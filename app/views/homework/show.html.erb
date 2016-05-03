@@ -2,7 +2,7 @@
 <div class = "card" style = "border-radius:20px; background:rgb(247,238,183)">
 
   <div class="row">
-    <div class = "col-sm-4" style = "padding: 7% ">
+    <div class = "col-sm-4" style = "text-align:center; padding: 2% ">
       <% if @due[0] >= 0 && @due[1] >= 0 && @due[2] >= 0 %>
         <h1 style= "font-size: 600%;"> <%= @due[2]%> </h1>
         <h4 style= ""> minutes </h4>
@@ -16,60 +16,54 @@
         <h1 style= >Date</h1>
       <% end %>
 
+      <br>
+      <button type = "button" class= "btn btn-sm btn-success" style = "background-color: #18bc9c"><%= link_to 'Update', homeworkupdate_path(@this_hw), class: 'link-to-text-color' %></button>
+      <button type = "button" class= "btn btn-sm btn-success" style = "background-color: #18bc9c"><%= link_to 'Delete', homeworkdestroy_path(@this_hw), data: {confirm: 'Are you sure?'}, class: 'link-to-text-color'%></button>
     </div>
 
-    <div class = "col-sm-6" style = "padding: 7%;">
+    <div class = "col-sm-6" style = "padding: 4%;">
 
-          <p>
-            <h4>Name: <%= @this_hw.name %></h2></h4>
-          </p>
+      <div class="alert alert-success" role="alert" style = "padding: 1%; background-color: white; color: black; border-color: black">
+        <strong>Name: </strong> <%= @this_hw.name %>
+      </div>
 
-          <p>
-              <h4>Due Date:<%= @this_hw.due_date.to_formatted_s(:rfc822)[0...-6]  %></h4>
-          </p>
-          </h3>
-          <p><h4>Time Left:</h4>
-              <% if @due[0] >= 0 && @due[1] >= 0 && @due[2] >= 0 %>
-                <h4><%= @due[0] %> days, <%= @due[1] %> hours, <%= @due[2]%> minutes left.</h4>
-              <% else %>
-                <div class="alert alert-danger" role="alert">
-                  <h4>Warning! Your assignment is already past due by <%= -(@due[0]+1) %> days, <%= @due[1] %> hours, <%= @due[2]%> minutes.</h4>
-                </div>
-              <% end %>
-            </h4>
-          </p>
+      <div class="alert alert-success" role="alert" style = "padding: 1%; background-color: white; color: black; border-color: black">
+        <strong>Due Date: </strong> <%= @this_hw.due_date.to_formatted_s(:rfc822)[0...-6]  %>
+      </div>
 
-          <p><h4>
-            Status:
-            <% if @this_userhw.status == nil %>
-                No submission yet.
-            <% else %>
-                <%= @this_userhw.status%>
-            <% end %>
-          </h4>
-          </p>
-          <p><h4>
-            Grade:
-              <% if @this_userhw.grade == nil %>
-                Not graded.
-              <% else %>
-                <%= @this_userhw.grade%>
-              <% end %>
-
-          </h4>
-          </p>
-          <p><h4>Comment:
-              <% if @this_userhw.comment == nil %>
-                No comment.
-              <% else %>
-                <%= @this_userhw.comment%>
-              <% end %>
-            </h4>
-          </p>
-
-          <%= link_to 'Update', homeworkupdate_path(@this_hw)%>
-          <%= link_to 'Delete', homeworkdestroy_path(@this_hw), data: {confirm: 'Are you sure?'}%>
+      <% if @due[0] >= 0 && @due[1] >= 0 && @due[2] >= 0 %>
+        <div class="alert alert-success" role="alert" style = "padding: 1%; background-color: white; color: black; border-color: black">
+          <strong>Time Left: </strong> <%= @due[0] %> days, <%= @due[1] %> hours, <%= @due[2]%> minutes left.
         </div>
+      <% else %>
+        <div class="alert alert-danger" role="alert">
+          <strong>Warning!</strong> Your assignment is already past due by <%= -(@due[0]+1) %> days, <%= @due[1] %> hours, <%= @due[2]%> minutes.
+        </div>
+      <% end %>
+
+      <div class="alert alert-success" role="alert" style = "padding: 1%; background-color: white; color: black; border-color: black">
+        <strong>Status: </strong>
+        <% if @this_userhw.status == nil %>
+            No submission yet.
+        <% else %>
+            <%= @this_userhw.status%>
+        <% end %>
+      </div>
+
+      <div class="alert alert-success" role="alert" style = "padding: 1%; background-color: white; color: black; border-color: black">
+        <strong>Description: </strong> <%= @this_hw.description %>
+      </div>
+
+      <div class="alert alert-success" role="alert" style = "padding: 1%; background-color: white; color: black; border-color: black">
+        <strong>Comment: </strong>
+        <% if @this_userhw.comment == nil %>
+          No comment.
+        <% else %>
+          <%= @this_userhw.comment%>
+        <% end %>
+      </div>
+
+  </div>
 
     </div>
 </div>
