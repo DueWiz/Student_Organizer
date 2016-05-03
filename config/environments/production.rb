@@ -89,7 +89,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   #middleware for ActionCable
-  config.middleware.use LatteActionCable
+  #config.middleware.use LatteActionCable
   config.web_socket_server_url = "wss://duewiz.herokuapp.com/"
   config.action_cable.allowed_request_origins = ["https://duewiz.herokuapp.com"]
 end
