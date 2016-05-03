@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   controller :group do
     post 'group/create' => :create
     post 'group/join' => :join
+    post 'group/destroy' => :destroy
   end
   get 'group/create'
   get 'group/update'
@@ -41,6 +42,8 @@ Rails.application.routes.draw do
 
   get 'homework/:id/edit' => 'homework#edit', as: :homeworkedit
   get 'homework/:id/update' => 'homework#update', as: :homeworkupdate
+  get 'homework/:id/destroy' => 'homework#destroy', as: :homeworkdestroy
+
   controller :homework do
     post 'homework/create' => :create
   end

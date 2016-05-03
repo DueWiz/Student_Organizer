@@ -17,6 +17,12 @@ class GroupController < ApplicationController
   end
 
   def destroy
+    deletion = Homework.where(group_id: params[:id])
+    deletion.find_each do |hw|
+      UserHomework.find_by_homework_id(hw.id).destroy
+    end
+    GroupUser.find_by_user_id_and_group_id(current_user.id,params[:id]).destroy
+    redirect_to homework_url
   end
 
   def join
