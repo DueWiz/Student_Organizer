@@ -80,6 +80,11 @@ class LoadLatteJob < ApplicationJob
           a_sub_status = assignment_page.xpath("//td[contains(., 'Submission status')]/following-sibling::td/text()")
           u_h.status = a_sub_status.to_s
           ActionCable.server.broadcast "latte_info_#{current_user.id}", latte_info: "#{a_sub_status}"
+          #description
+          a_description = assignment_page.css("div#intro").text
+          h.description = a_description.to_s
+          ActionCable.server.broadcast "latte_info_#{current_user.id}", latte_info: "#{a_description}"
+
           a_due_date = assignment_page.xpath("//td[contains(., 'Due date')]/following-sibling::td/text()")
           unless a_due_date.to_s == ""
             estHoursOffset = -5
