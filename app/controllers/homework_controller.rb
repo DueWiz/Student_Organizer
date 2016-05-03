@@ -38,6 +38,7 @@ class HomeworkController < ApplicationController
         count = 0
       end
     end
+    @homeworks = Homework.all
   end
 
   def result
