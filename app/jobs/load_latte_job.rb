@@ -41,7 +41,7 @@ class LoadLatteJob < ApplicationJob
     hw_count = 0
     group_id = nil
     page.links_with(css: "a.course_show").each do |link|
-      if link.text =~ /^161/
+n      if link.text =~ /^161/
         course_page = link.click
         course_page.links_with(css: "li.assign div.activityinstance a").each do |a_link|
           hw_count += 1
@@ -83,7 +83,6 @@ class LoadLatteJob < ApplicationJob
           #description
           a_description = assignment_page.css("div#intro").text
           h.description = a_description.to_s
-          ActionCable.server.broadcast "latte_info_#{current_user.id}", latte_info: "#{a_description}"
 
           a_due_date = assignment_page.xpath("//td[contains(., 'Due date')]/following-sibling::td/text()")
           unless a_due_date.to_s == ""
