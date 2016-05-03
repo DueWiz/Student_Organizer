@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'calendar/index'
+
   get 'latte/info'
 
   post 'latte/create'
