@@ -1,6 +1,26 @@
 class LoadLatteJob < ApplicationJob
   queue_as :default
 
+  TERM = {"1"=>"Spring","2"=>"Summer","3"=>"Fall"}
+
+  def create_group(link_text,current_user)
+      course_abbr = link_text.split(':')[0]
+      course_abbr.strip!
+      course_year = "20#{course_abbr[0..1]}".to_i
+      course_term = TERM[course_abbr[2]]
+      course_section = course_abbr[-1].to_i
+      group = Group.new
+      group.name = course_abbr[3..-3]
+      group.term = course_term
+      group.year = course_year
+      group.section = course_section
+      group.save
+      group_user = GroupUser.new
+      group_user.user_id = current_user.id
+      group_user.group_id = group.id
+      group_user.save
+  end
+
   def perform(current_user)
     agent = Mechanize.new
     agent.agent.http.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -17,10 +37,10 @@ class LoadLatteJob < ApplicationJob
     ActionCable.server.broadcast "latte_info_#{current_user.id}", latte_info: 'Logged in'
     ActionCable.server.broadcast "latte_info_#{current_user.id}", bar_status: 'Logged in'
 
-
     hw_count = 0
     page.links_with(css: "a.course_show").each do |link|
       if link.text =~ /^161/
+        create_group(link.text,current_user)
         course_page = link.click
         course_page.links_with(css: "li.assign div.activityinstance a").each do |a_link|
           hw_count += 1
