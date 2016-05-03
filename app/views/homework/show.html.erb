@@ -1,52 +1,74 @@
 <br>
-<div class = "card" style = "border-radius:20px;">
-  <div class="card-header link-to-text-color" style="background-color: #2c3e50;border-top-left-radius:1.25em; border-top-right-radius:1.25em;">
-    <h2><%= @this_hw.name %></h2>
-  </div>
-  <div class="container">
-<p><a href="#due" class="btn btn-info btn-sm" data-toggle="collapse">Due Date:</a>
-  <div id="due" class="collapse.in">
-    <%= @this_hw.due_date.to_formatted_s(:rfc822)[0...-6]  %>
-  </div>
-</p>
-<p><a href="#daystodue" class="btn btn-info btn-sm" data-toggle="collapse">Time Left:</a>
-  <div id="daystodue" class="collapse.in">
-    <% if @due[0] >= 0 && @due[1] >= 0 && @due[2] >= 0 %>
-      <%= @due[0] %> days, <%= @due[1] %> hours, <%= @due[2]%> minutes left.
-    <% else %>
-      <div class="alert alert-danger" role="alert">
-        Warning! Your assignment is already past due by <%= -(@due[0]+1) %> days, <%= @due[1] %> hours, <%= @due[2]%> minutes.
-      </div>
-    <% end %>
-  </div>
-</p>
-<p><a href="#status" class="btn btn-info btn-sm" data-toggle="collapse">Status:</a>
-  <div id="status" class="collapse.in">
-    <% if @this_userhw.status == nil %>
-      No submission yet.
-    <% else %>
-      <%= @this_userhw.status%>
-    <% end %>
-  </div>
-</p>
-<p><a href="#grade" class="btn btn-info btn-sm" data-toggle="collapse">Grade:</a>
-  <div id="grade" class="collapse.in">
-    <% if @this_userhw.grade == nil %>
-      Not graded.
-    <% else %>
-      <%= @this_userhw.grade%>
-    <% end %>
-  </div>
-</p>
-<p><a href="#comment" class="btn btn-info btn-sm" data-toggle="collapse">Comment:</a>
-  <div id="comment" class="collapse.in">
-    <% if @this_userhw.comment == nil %>
-      No comment.
-    <% else %>
-      <%= @this_userhw.comment%>
-    <% end %>
-  </div>
-</p>
-<%= link_to 'Update', homeworkupdate_path(@this_hw)%>
-</div>
+<div class = "card" style = "border-radius:20px; background:rgb(247,238,183)">
+
+  <div class="row">
+    <div class = "col-sm-4" style = "padding: 7% ">
+      <% if @due[0] >= 0 && @due[1] >= 0 && @due[2] >= 0 %>
+        <h1 style= "font-size: 600%;"> <%= @due[2]%> </h1>
+        <h4 style= ""> minutes </h4>
+        <h1 style= "font-size: 400%; "> <%= @due[1]%> </h1>
+        <h4 style= ""> hours </h4>
+        <h1 style= "font-size: 200%;"> <%= @due[0]%> </h1>
+        <h4 style= > days </h4>
+      <% else %>
+        <h1 style= "">Past</h1>
+        <h1 style= "">Due</h1>
+        <h1 style= >Date</h1>
+      <% end %>
+
+    </div>
+
+    <div class = "col-sm-6" style = "padding: 7%;">
+
+          <p>
+            <h4>Name: <%= @this_hw.name %></h2></h4>
+          </p>
+
+          <p>
+              <h4>Due Date:<%= @this_hw.due_date.to_formatted_s(:rfc822)[0...-6]  %></h4>
+          </p>
+          </h3>
+          <p><h4>Time Left:</h4>
+              <% if @due[0] >= 0 && @due[1] >= 0 && @due[2] >= 0 %>
+                <h4><%= @due[0] %> days, <%= @due[1] %> hours, <%= @due[2]%> minutes left.</h4>
+              <% else %>
+                <div class="alert alert-danger" role="alert">
+                  <h4>Warning! Your assignment is already past due by <%= -(@due[0]+1) %> days, <%= @due[1] %> hours, <%= @due[2]%> minutes.</h4>
+                </div>
+              <% end %>
+            </h4>
+          </p>
+
+          <p><h4>
+            Status:
+            <% if @this_userhw.status == nil %>
+                No submission yet.
+            <% else %>
+                <%= @this_userhw.status%>
+            <% end %>
+          </h4>
+          </p>
+          <p><h4>
+            Grade:
+              <% if @this_userhw.grade == nil %>
+                Not graded.
+              <% else %>
+                <%= @this_userhw.grade%>
+              <% end %>
+
+          </h4>
+          </p>
+          <p><h4>Comment:
+              <% if @this_userhw.comment == nil %>
+                No comment.
+              <% else %>
+                <%= @this_userhw.comment%>
+              <% end %>
+            </h4>
+          </p>
+
+          <%= link_to 'Update', homeworkupdate_path(@this_hw)%>
+        </div>
+
+    </div>
 </div>
