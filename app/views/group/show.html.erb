@@ -36,13 +36,17 @@
                 <div class="col-sm-4 link-to-text-color">
                   <h1 style="text-align: center; "> <%= @date_infos[i][j][1].to_s %></h1>
                   <div style="padding: 0px; margin: 0px;">
-                  <h5> <%= @date_infos[i][j][2]%></h5>
+                  <h4 > <%= @date_infos[i][j][2]%></h4>
                   </div>
                 </div>
                 <div class="col-sm-8 link-to-text-color">
                   <h6>
                     <p>Name: <%= h.name%></p>
-                    <p>Professor: <%= h.professor%></p>
+                    <p>Class:
+                      <% if not h.group_id.nil? %>
+                        <%= Group.find_by_id(h.group_id).name %>
+                      <% end%>
+                    </p>
                     <p>Description: <%= h.description%></p>
                   </h6>
                 </div>
