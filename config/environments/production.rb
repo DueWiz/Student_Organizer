@@ -4,7 +4,7 @@ Rails.application.configure do
   # Code is not reloaded between requests.
 
   config.action_mailer.default_url_options = { host: 'https://duewiz.herokuapp.com/' }
-  
+
   config.cache_classes = true
 
   # Eager load code on boot. This eager loads most of Rails and
@@ -91,4 +91,5 @@ Rails.application.configure do
   #middleware for ActionCable
   config.middleware.use LatteActionCable
   config.web_socket_server_url = "wss://duewiz.herokuapp.com/"
+  config.action_cable.allowed_request_origins = ["https://duewiz.herokuapp.com"]
 end
