@@ -79,4 +79,8 @@ class GroupController < ApplicationController
     end
   end
 
+  def user_not_authorized
+    newGroup = GroupUser.create(user_id: current_user.id, group_id: params[:group_id], membership: "pending") 
+    redirect_to(request.referrer || root_path)
+  end
 end
