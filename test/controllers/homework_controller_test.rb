@@ -42,7 +42,6 @@ class HomeworkControllerTest < ActionDispatch::IntegrationTest
     get homeworkshow_path(@homework)
     assert_response :success
   end
->>>>>>> sylarLu
   #
   test "should get update" do
     get homeworkupdate_path(@homework)
