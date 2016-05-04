@@ -72,12 +72,13 @@ class GroupController < ApplicationController
         count = 0
       end
     end
-    @pending = GroupUser.where(group_id: @group.id, membership: "pending")
-    # @pendingUser = Array.new
-    # @pending.each do |groupUser|
-    #   @pendingUser.push(User.where(id: groupUser.user_id))
-    # end
-  end
+    if params[:id] == "-1"
+      @skip = true
+    else
+      @pending = GroupUser.where(group_id: @group.id, membership: "pending") unless params[:id] == "-1"
+      @skip = false
+    end
+  end 
 
   def create
     groupCheck = Group.find_by_name_and_year_and_term_and_section(params[:group][:name],params[:group][:year],params[:group][:term],params[:group][:section])
