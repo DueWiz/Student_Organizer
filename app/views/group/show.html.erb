@@ -38,7 +38,7 @@
         <h2><%= @group.year.to_s + "-" + @group.term + "-"+ @group.name + "-Section " + @group.section.to_s%>
         <td><%= link_to 'Quit the group', {:controller => "group",
                                           :action => "destroy",
-                                          :id => @group.id}, method: 'post', class: "btn btn-primary btn-sm",
+                                          :id => @group.id}, method: 'post', class: "btn btn-primary btn-sm", 
                                           data: {confirm: 'Doing so will delete every homework you have under this group. Are you sure?'} %></td></h2>
     <% else %>
         <h2>My Own Homeworks</h2>

@@ -19,5 +19,15 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
     get "/homework"
     assert_response :success
 
+    assert_difference('Group.count') do
+      post "/group/create", group: {name: 'COSI166B', year: 2016, term: 'Spring', section: 1}
+    end
+    assert_redirected_to homework_url
+
+    assert_difference('Homework.count') do
+      post "/homework/create", homework: {name: 'New hw', 'due_date(1i)' => 2016, 'due_date(2i)' => 5, 'due_date(3i)' => 16, 'due_date(4i)' => 12, 'due_date(5i)' => 30, group_id: 1}
+    end
+    assert_redirected_to homework_url
+
   end
 end

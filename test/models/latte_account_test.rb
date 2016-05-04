@@ -4,9 +4,9 @@ class LatteAccountTest < ActiveSupport::TestCase
   test "the truth" do
     assert true
   end
-  it "has two latte account in database" do
-    LatteAccount.count.must_equal 2
-  end
+  # it "has two latte account in database" do
+  #   LatteAccount.count.must_equal 2
+  # end
 
   # it "can accept a new LatteAccount" do
   #   LatteAccount.create(name: test, user_id: 3, password_digest: )
