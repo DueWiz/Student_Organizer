@@ -17,11 +17,11 @@
       <tr>
         <td><%= link_to 'My own homeworks', groupshow_path(-1)%></td>
       <tr>
-      <% user_groups.each do |group| %>
-        <tr>
-          <td><%= link_to group.year.to_s + "-" + group.term + "-" + group.name + "-" + group.section.to_s, groupshow_path(group) %></td>
-        <tr>
-      <% end %>
+        <% user_groups.each do |group| %>
+          <tr>
+            <td><%= link_to group.year.to_s + "-" + group.term + "-" + group.name + "-" + group.section.to_s, groupshow_path(group) %></td>
+          <tr>
+        <% end %>
     </table>
     <br/>
     <div style = "padding:10px;">

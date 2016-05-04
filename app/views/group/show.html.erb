@@ -13,7 +13,17 @@
       <tbody>
         <tr>
           <td><%= individual.user.email %></td>
-          <td>Accept/Reject</td>
+          <td><%= link_to 'Accept', {:controller => "group", 
+                                     :action => "decision", 
+                                     :id => individual.group_id, 
+                                     :user_id => individual.user.id,
+                                     :decision => "true"}, method: 'post', class: "btn btn-sm btn-success" %>
+              <%= link_to 'Reject', {:controller => "group", 
+                                     :action => "decision", 
+                                     :id => individual.group_id, 
+                                     :user_id => individual.user.id,
+                                     :decision => "false"}, method: 'post', class: "btn btn-sm btn-danger" %>
+                                    </td>
         </tr>
       </tbody>
     <% end %>

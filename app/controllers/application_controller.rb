@@ -10,7 +10,12 @@ class ApplicationController < ActionController::Base
 
   def user_groups
     if user_signed_in?
-      current_user.groups
+    my_groupUsers = current_user.group_users.where(membership: ['admin','member'])
+    mygroups = Array.new
+    my_groupUsers.each do |g|
+      mygroups.push(g.group_id)
+    end
+    my_groups = Group.where(id: mygroups)
     else
       []
     end

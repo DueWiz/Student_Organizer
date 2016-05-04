@@ -19,7 +19,7 @@
         <td><%= r.term %></td>
         <td><%= r.section %></td>
         <% if @relation.find_by_user_id_and_group_id(current_user.id,r.id)%>
-          <% if @relation.find_by_user_id_and_group_id(current_user.id,r.id).membership == "pending"%>
+          <% if @relation.find_by_user_id_and_group_id(current_user.id,r.id).membership == "pending" || @relation.find_by_user_id_and_group_id(current_user.id,r.id).membership == "denied"%>
             <td>Request Pending</td>
           <% else %>
           <td><%= link_to 'Already In', {:controller => "group",

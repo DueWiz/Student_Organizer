@@ -1,7 +1,7 @@
 class GroupController < ApplicationController
   before_action :authenticate_user!
   def index
-    @my_groups = current_user.groups
+
   end
 
   def new
@@ -29,7 +29,17 @@ class GroupController < ApplicationController
       Homework.where(group_id: params[:group_id]).find_each do |hw|
         UserHomework.create(user_id: current_user.id, homework_id: hw.id, admin: true)
       end
-      redirect_to groupshow_path(params[:group_id])
+      redirect_to groupshow_path(@group.id)
+  end
+
+  def decision
+    @groupUser = GroupUser.where(group_id: params[:id], user_id: params[:user_id])
+    if params[:decision] == "true"
+      @groupUser.update(membership: "member")
+    else 
+      @groupUser.update(membership: "denied")  
+    end
+    redirect_to groupshow_path(:id => params[:id])  
   end
 
   def search
