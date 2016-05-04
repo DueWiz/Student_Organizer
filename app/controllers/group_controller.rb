@@ -26,7 +26,9 @@ class GroupController < ApplicationController
   end
 
   def join
-      newGroup = GroupUser.create(user_id: current_user.id, group_id: params[:group_id], admin: true)
+      @group = Group.find(params[:group_id])
+      authorize @group
+      newGroup = GroupUser.create(user_id: current_user.id, group_id: params[:group_id], admin: false)
       Homework.where(group_id: params[:group_id]).find_each do |hw|
         UserHomework.create(user_id: current_user.id, homework_id: hw.id, admin: true)
       end

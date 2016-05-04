@@ -9,4 +9,7 @@ class GroupPolicy
   def create?
   end
 
+  def join?
+  	group.public?
+  end
 end
