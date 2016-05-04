@@ -19,10 +19,9 @@ ActiveRecord::Schema.define(version: 20160407184451) do
     t.boolean  "admin",      default: false, null: false
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.index ["group_id"], name: "index_group_users_on_group_id"
+    t.index ["user_id"], name: "index_group_users_on_user_id"
   end
-
-  add_index "group_users", ["group_id"], name: "index_group_users_on_group_id"
-  add_index "group_users", ["user_id"], name: "index_group_users_on_user_id"
 
   create_table "groups", force: :cascade do |t|
     t.string   "name"
@@ -41,9 +40,8 @@ ActiveRecord::Schema.define(version: 20160407184451) do
     t.string   "professor"
     t.string   "description"
     t.integer  "group_id"
+    t.index ["group_id"], name: "index_homeworks_on_group_id"
   end
-
-  add_index "homeworks", ["group_id"], name: "index_homeworks_on_group_id"
 
   create_table "latte_accounts", force: :cascade do |t|
     t.string   "name"
@@ -51,9 +49,8 @@ ActiveRecord::Schema.define(version: 20160407184451) do
     t.datetime "updated_at", null: false
     t.integer  "user_id"
     t.string   "password"
+    t.index ["user_id"], name: "index_latte_accounts_on_user_id"
   end
-
-  add_index "latte_accounts", ["user_id"], name: "index_latte_accounts_on_user_id"
 
   create_table "user_homeworks", force: :cascade do |t|
     t.string   "status"
@@ -65,10 +62,9 @@ ActiveRecord::Schema.define(version: 20160407184451) do
     t.integer  "user_id"
     t.integer  "homework_id"
     t.string   "note"
+    t.index ["homework_id"], name: "index_user_homeworks_on_homework_id"
+    t.index ["user_id"], name: "index_user_homeworks_on_user_id"
   end
-
-  add_index "user_homeworks", ["homework_id"], name: "index_user_homeworks_on_homework_id"
-  add_index "user_homeworks", ["user_id"], name: "index_user_homeworks_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
@@ -84,9 +80,8 @@ ActiveRecord::Schema.define(version: 20160407184451) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
 end
