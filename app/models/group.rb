@@ -2,6 +2,7 @@ class Group < ApplicationRecord
   TERMS = %i[Spring Summer Fall]
   validates :name, presence: true
   validates :year, presence: true
+  validates :public, presence: true
   validates :term, presence: true
   validates :section, presence: true
 
