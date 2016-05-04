@@ -38,16 +38,21 @@ class LoadLatteJob < ApplicationJob
     ActionCable.server.broadcast "latte_info_#{current_user.id}", latte_info: 'Logged in'
     ActionCable.server.broadcast "latte_info_#{current_user.id}", bar_status: 'Logged in'
 
+    #initialize vars
     hw_count = 0
     group_id = nil
+
+    #counting number of items to load
     page.links_with(css: "a.course_show").each do |link|
-n      if link.text =~ /^161/
+      if link.text =~ /^161/
         course_page = link.click
         course_page.links_with(css: "li.assign div.activityinstance a").each do |a_link|
           hw_count += 1
         end
       end
     end
+
+
     hw_count2 = 0
     ActionCable.server.broadcast "latte_info_#{current_user.id}", latte_info: "Expect to load #{hw_count} items."
     ActionCable.server.broadcast "latte_info_#{current_user.id}", bar_status: 'Loading'
