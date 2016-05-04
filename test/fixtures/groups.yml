@@ -4,7 +4,13 @@
 one:
   id: 1
   name: G1
+  year: 2016
+  term: Spring
+  section: 1
 
 two:
   id: 2
   name: G2
+  year: 2016
+  term: Spring
+  section: 1

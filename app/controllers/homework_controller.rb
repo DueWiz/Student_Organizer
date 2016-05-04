@@ -81,13 +81,16 @@ class HomeworkController < ApplicationController
   def edit
     homework = Homework.find_by_id(params[:id])
     homework.name = params[:homework][:name]
-    Time.zone = 'EST'
     homework.due_date = Time.zone.local(params[:homework]["due_date(1i)"].to_i,
                                  params[:homework]["due_date(2i)"].to_i,
                                  params[:homework]["due_date(3i)"].to_i,
                                  params[:homework]["due_date(4i)"].to_i,
                                  params[:homework]["due_date(5i)"].to_i,)
     homework.description = params[:homework][:description]
+    thisGroup = Group.find_by_id(params[:group])
+    if thisGroup != nil
+      homework.group_id = thisGroup.id
+    end
     homework.save!
     redirect_to homeworkshow_path
   end
@@ -102,7 +105,9 @@ class HomeworkController < ApplicationController
                                  params[:homework]["due_date(5i)"].to_i,)
     @new.description = params[:homework][:description]
     thisGroup = Group.find_by_id(params[:group])
-    @new.group_id = thisGroup.id
+    if thisGroup != nil
+      @new.group_id = thisGroup.id
+    end
     @new.save!
     UserHomework.create(user_id: current_user.id, homework_id: @new.id, admin: true)
     redirect_to homework_url
@@ -113,6 +118,12 @@ class HomeworkController < ApplicationController
     @due = time_due(@this_hw.due_date)
     @this_userhw = current_user.user_homeworks.find_by_homework_id(params[:id])
     @date_info = display_date_info(@this_hw)
+    this_group = Group.find_by_id(@this_hw.group_id)
+    if this_group != nil
+      @groupName = this_group.year.to_s + "-" + this_group.term + "-"+ this_group.name + "-Section " + this_group.section.to_s
+    else
+      @groupName = "My Own Homeworks"
+    end
   end
 
   def update

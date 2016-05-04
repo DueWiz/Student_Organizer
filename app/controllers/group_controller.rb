@@ -19,7 +19,7 @@ class GroupController < ApplicationController
   def destroy
     deletion = Homework.where(group_id: params[:id])
     deletion.find_each do |hw|
-      UserHomework.find_by_homework_id(hw.id).destroy
+      UserHomework.find_by_user_id_and_homework_id(current_user.id,hw.id).destroy
     end
     GroupUser.find_by_user_id_and_group_id(current_user.id,params[:id]).destroy
     redirect_to homework_url
@@ -39,8 +39,13 @@ class GroupController < ApplicationController
   end
 
   def show
-    @group = Group.find_by_id(params[:id])
-    hws = Homework.where('group_id = ?', @group.id).order(:due_date)
+    if params[:id] == "-1"
+      myhws = getMyHw
+      hws = myhws.where(group_id: nil).order(:due_date)
+    else
+      @group = Group.find_by_id(params[:id])
+      hws = Homework.where('group_id = ?', @group.id).order(:due_date)
+    end
     @table = Array.new
     @date_infos = Array.new
     index = 0
