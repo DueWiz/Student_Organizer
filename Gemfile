@@ -14,7 +14,7 @@ gem "devise", :github => 'plataformatec/devise', :branch => 'master'
 
 gem "omniauth"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '>= 5.0.0.beta3', '< 5.1'
+gem 'rails', '>= 5.0.0.beta4', '< 5.1'
 # Use Puma as the app server
 gem 'puma'
 # Use SCSS for stylesheets
@@ -59,7 +59,6 @@ gem 'font-awesome-rails'
 #bootstrap form
 gem 'bootstrap_form', :git => 'https://github.com/narugami/rails-bootstrap-forms.git', :branch => "features/rails5"
 
-gem 'rails_12factor', group: :production
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
