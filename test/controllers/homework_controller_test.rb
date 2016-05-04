@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class HomeworkControllerTest < ActionDispatch::IntegrationTest
+  test "the truth" do
+    assert true
+  end
   # test "should get index" do
-  #   get homework_index_url
+  #   get root_url
   #   assert_response :success
   # end
   #
