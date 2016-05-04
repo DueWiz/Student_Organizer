@@ -90,6 +90,6 @@ Rails.application.configure do
 
   #middleware for ActionCable
   #config.middleware.use LatteActionCable
-  #config.web_socket_server_url = "wss://duewiz.herokuapp.com/"
-  config.action_cable.allowed_request_origins = ["https://duewiz.herokuapp.com","http://duewiz.herokuapp.com"]
+  config.action_cable.url = "wss://duewiz.herokuapp.com/cable"
+  config.action_cable.allowed_request_origins = ["https://duewiz.herokuapp.com",/http:\/\/duewiz.herokuapp.com.*/]
 end
