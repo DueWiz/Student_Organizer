@@ -41,7 +41,7 @@ class GroupController < ApplicationController
   def show
     if params[:id] == "-1"
       myhws = getMyHw
-      hws = myhws.where(group_id: nil)
+      hws = myhws.where(group_id: nil).order(:due_date)
     else
       @group = Group.find_by_id(params[:id])
       hws = Homework.where('group_id = ?', @group.id).order(:due_date)
