@@ -10,15 +10,23 @@
       <%= radio_button_tag(:hw_choice, "Uncompleted",true, onclick: "$('#special').submit();")%>
       <%= label_tag(:completed, "Uncompleted") %>
   </div>
-    <div class="input-group col-xs-4">
+    <div class="input-group input-group-sm col-xs-4">
       <%= text_field_tag :search, params[:search], onchange: "$('#special').submit();", class: "form-control input-xs", placeholder: "Search Homework..." %>
-      <div class="input-group-addon">
+      <div class="input-group-addon" style="height:20px; padding:0px">
         <button type="submit" class="btn btn-primary btn-sm" style="background-color: #18bc9c">
           <i class="fa fa-search"></i>
         </button>
       </div>
     </div>
   </div>
+  <% if current_user.latte_account == nil %>
+    <div class="alert alert-warning alert-dismissible fade in" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      Reminder: you haven't subscribed Latte and you can do it anytime through the button on the top.
+    </div>
+  <% end %>
 <% end %>
 <div id="search_results">
 <style>

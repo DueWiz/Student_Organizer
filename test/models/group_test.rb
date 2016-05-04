@@ -9,12 +9,12 @@ class GroupTest < ActiveSupport::TestCase
   end
 
   it "can accept a new group" do
-    Group.create(name: "G3")
+    Group.create(name: "G3", year: 2016, term: "Spring", section: 1)
     Group.count.must_equal 3
   end
 
   it "can delete an existing group" do
-    g = Group.create(name: "G3")
+    g = Group.create(name: "G3", year: 2016, term: "Spring", section: 1)
     Group.count.must_equal 3
     n = g.id
     Group.delete(n)
