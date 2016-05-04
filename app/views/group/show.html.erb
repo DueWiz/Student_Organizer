@@ -1,7 +1,12 @@
 <% if GroupUser.where(user_id: current_user.id, group_id: @group.id, membership: "admin").exists? %>
   <% if !@pending.empty? %>
-<div class="panel panel-default">
-  <div class="panel-heading"> <h4>Pending Approvals for Group</h4></div>
+      <br />
+      <div class="alert alert-warning alert-dismissible fade in" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+        <div class="panel panel-default">
+          <div class="panel-heading"> <h4>Pending Approvals for Group</h4></div>
     <table class="table", style="border-collapse: separate; border-spacing: 5px 1px;">
       <thead>
         <tr>
@@ -29,6 +34,7 @@
     <% end %>
     </table>
   </div>
+    </div>
 </div>
   <% end %>
 <% end %>
