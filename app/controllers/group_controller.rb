@@ -70,7 +70,7 @@ class GroupController < ApplicationController
     if groupCheck == nil
       @new = Group.create(name: params[:group][:name].upcase, year: params[:group][:year], term: params[:group][:term], section: params[:group][:section])
       @new.save!
-      GroupUser.create(user_id: current_user.id, group_id: @new.id)
+      GroupUser.create(user_id: current_user.id, group_id: @new.id, admin: true)
       redirect_to homework_url
     else
       @groupName = params[:group][:name]
