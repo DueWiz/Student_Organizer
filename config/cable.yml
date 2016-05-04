@@ -9,19 +9,20 @@
 # test:
 #   adapter: async
 development: &development
-    adapter: redis
+  adapter: redis
   url: redis://localhost:6379
   host: localhost
   port: 6379
   timeout: 100
   inline: true
+
 test: *development
 
 production: &production
- adapter: redis
-  :url: redis://redistogo:efedf4614c6c9b98667075aea4bbaa4e@hoki.redistogo.com:9079/
-  :host: hoki.redistogo.com
-  :port: 9079
-  :password: efedf4614c6c9b98667075aea4bbaa4e
-  :inline: true
-  :timeout: 10
+  adapter: redis
+  url: redis://redistogo:efedf4614c6c9b98667075aea4bbaa4e@hoki.redistogo.com:9079/
+  host: hoki.redistogo.com
+  port: 9079
+  password: efedf4614c6c9b98667075aea4bbaa4e
+  inline: true
+  timeout: 10
