@@ -28,7 +28,7 @@ class GroupController < ApplicationController
   def join
       @group = Group.find(params[:group_id])
       authorize @group
-      newGroup = GroupUser.create(user_id: current_user.id, group_id: params[:group_id], admin: false)
+      newGroup = GroupUser.create(user_id: current_user.id, group_id: params[:group_id], membership: "member")
       Homework.where(group_id: params[:group_id]).find_each do |hw|
         UserHomework.create(user_id: current_user.id, homework_id: hw.id, admin: true)
       end
@@ -72,7 +72,7 @@ class GroupController < ApplicationController
     if groupCheck == nil
       @new = Group.create(name: params[:group][:name].upcase, year: params[:group][:year], term: params[:group][:term], section: params[:group][:section], public: params[:group][:public])
       @new.save!
-      GroupUser.create(user_id: current_user.id, group_id: @new.id, admin: true)
+      GroupUser.create(user_id: current_user.id, group_id: @new.id, membership: "admin")
       redirect_to homework_url
     else
       @groupName = params[:group][:name]
