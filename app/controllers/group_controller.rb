@@ -68,7 +68,7 @@ class GroupController < ApplicationController
       @date_infos[index] += [display_date_info(hw)]
       count += 1
       if count == 3
-        index += 1
+        index += 1 
         count = 0
       end
     end

@@ -3,7 +3,8 @@
   <div class="card-header" style="background-color: #2c3e50; border-top-left-radius:0.5em; border-top-right-radius:0.5em; margin:0px;">
     <div class="row">
     <div class = "col-sm-5">
-    <h4>Classes</h4>
+    <h8>Classes</h8><br />
+    <h8>Projects</h8>
     </div>
     <div class="col-sm-7">
       <%= form_tag(group_search_path, method: "get", role: "form", class: "form", id: "groupSearch") do %>
@@ -15,13 +16,26 @@
   <div class="card-block" style="padding:10px;">
     <table class="table table-condense table-hover" style="border-spacing: 0px 0px;">
       <tr>
-        <td><%= link_to 'My own homeworks', groupshow_path(-1)%></td>
-      <tr>
+        <td><%= link_to 'My Homework', groupshow_path(-1)%></td>
+      </tr> 
+        <td style="background-color: #2c3e50;">Classes</td>
         <% user_groups.each do |group| %>
-          <tr>
-            <td><%= link_to group.year.to_s + "-" + group.term + "-" + group.name + "-" + group.section.to_s, groupshow_path(group) %></td>
-          <tr>
+          <% if group.public == true %>
+            <tr>
+              <td><%= link_to group.year.to_s + "-" + group.term + "-" + group.name + "-" + group.section.to_s, groupshow_path(group) %></td>
+            </tr>
+          <% end %>  
         <% end %>
+      <tr>
+        <td style="background-color: #2c3e50;">Projects</td>
+        <% user_groups.each do |group| %>
+          <% if group.public == false%>
+            <tr>
+              <td><%= link_to group.year.to_s + "-" + group.term + "-" + group.name + "-" + group.section.to_s, groupshow_path(group) %></td>
+            </tr>
+          <% end %>  
+        <% end %>  
+      </tr>      
     </table>
     <br/>
     <div style = "padding:10px;">
