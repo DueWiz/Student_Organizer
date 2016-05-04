@@ -120,5 +120,7 @@ class HomeworkController < ApplicationController
   end
 
   def destroy
+    UserHomework.find_by_homework_id_and_user_id(params[:id],current_user.id).destroy
+    redirect_to homework_url
   end
 end

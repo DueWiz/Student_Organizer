@@ -17,6 +17,12 @@ class GroupController < ApplicationController
   end
 
   def destroy
+    deletion = Homework.where(group_id: params[:id])
+    deletion.find_each do |hw|
+      UserHomework.find_by_homework_id(hw.id).destroy
+    end
+    GroupUser.find_by_user_id_and_group_id(current_user.id,params[:id]).destroy
+    redirect_to homework_url
   end
 
   def join
@@ -57,7 +63,7 @@ class GroupController < ApplicationController
   def create
     groupCheck = Group.find_by_name_and_year_and_term_and_section(params[:group][:name],params[:group][:year],params[:group][:term],params[:group][:section])
     if groupCheck == nil
-      @new = Group.create(name: params[:group][:name].capitalize, year: params[:group][:year], term: params[:group][:term], section: params[:group][:section])
+      @new = Group.create(name: params[:group][:name].upcase, year: params[:group][:year], term: params[:group][:term], section: params[:group][:section])
       @new.save!
       GroupUser.create(user_id: current_user.id, group_id: @new.id)
       redirect_to homework_url
