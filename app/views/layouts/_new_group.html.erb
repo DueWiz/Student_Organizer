@@ -13,6 +13,10 @@
             <%= f.radio_button :year, 2016, label: "2016", checked: true %>
             <%= f.radio_button :year, 2017, label: "2017" %>
           <% end %>
+          <%= f.form_group :public, label: { text: "Public/Private" } do %>
+            <%= f.radio_button :public, true, label: "Public", checked: true %>
+            <%= f.radio_button :public, false, label: "Private" %>  
+          <% end %>                   
           <%= f.collection_select(:term, Group::TERMS, :to_s, lambda{|i| i.to_s.humanize})%>
           <%= f.number_field :section, :min => 1, :max => 10, placeholder: "Must be an integer between 1 and 10" %>
           <div class="modal-footer">

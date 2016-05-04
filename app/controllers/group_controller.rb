@@ -68,7 +68,7 @@ class GroupController < ApplicationController
   def create
     groupCheck = Group.find_by_name_and_year_and_term_and_section(params[:group][:name],params[:group][:year],params[:group][:term],params[:group][:section])
     if groupCheck == nil
-      @new = Group.create(name: params[:group][:name].upcase, year: params[:group][:year], term: params[:group][:term], section: params[:group][:section])
+      @new = Group.create(name: params[:group][:name].upcase, year: params[:group][:year], term: params[:group][:term], section: params[:group][:section], public: params[:group][:public])
       @new.save!
       GroupUser.create(user_id: current_user.id, group_id: @new.id, admin: true)
       redirect_to homework_url
