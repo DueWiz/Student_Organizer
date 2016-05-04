@@ -5,7 +5,7 @@
   <%= f.text_field :name, autofocus: true %>
   <%= f.datetime_select :due_date, :minute_step => 1%>
   <label>Class</label>
-  <%= select_tag "group", options_from_collection_for_select(user_groups, "id", "name"), class: "form-control" %>
+  <%= select_tag "group", options_from_collection_for_select(user_groups, "id", "name"), class: "form-control", :prompt => "If this homework doesn't belong to any class, choose me." %>
   <%= f.text_area :description, rows: '10' %>
   <%= link_to 'Cancel', homeworkshow_path(@homework), class: "btn btn-info", style: "background-color: #2c3e50" %>
   <%= f.submit "Submit", class: "btn btn-primary", style: "background-color: #18bc9c", data: {confirm: 'You change on this homework will affect the whole community. Are you sure?'}%>
