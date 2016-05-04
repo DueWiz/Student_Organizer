@@ -27,10 +27,17 @@
                                          :id => r.id}, method: 'get', class: "btn btn-primary btn-sm" %></td>
           <% end %>
         <% else %>
+          <% if r.public? %>
           <td><%= link_to 'Join Now', {:controller => "group",
                                        :action => "join",
                                        :group_id => r.id},
                                        :method => "post", class: "btn btn-info btn-sm", style: "background-color: #18bc9c"%></td>
+          <% else %>
+          <td><%= link_to 'Request Membership', {:controller => "group",
+                                       :action => "join",
+                                       :group_id => r.id},
+                                       :method => "post", class: "btn btn-info btn-sm", style: "background-color: #18bc9c"%></td> 
+          <% end %>
         <% end %>
       </tr>
    <% end %>
