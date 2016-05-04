@@ -8,7 +8,7 @@
       </div>
       <div class="modal-body">
           <%= bootstrap_form_for @homework, url: homework_create_path(@homework), method: :post, class:"form-group" do |f| %>
-            <%= f.text_field :name, autofocus: true %>
+            <%= f.text_field :name, autofocus: true, :required => 'required'%>
             <%= f.datetime_select :due_date, :minute_step => 1%>
             <label>Class</label>
             <%= select_tag "group", options_from_collection_for_select(user_groups, "id", "name"), class: "form-control", :prompt => "If this homework doesn't belong to any class, choose me."%>
