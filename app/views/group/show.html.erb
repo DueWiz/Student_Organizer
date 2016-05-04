@@ -1,4 +1,4 @@
-<% if GroupUser.where(user_id: current_user.id, group_id: @group.id, membership: "admin").exists? && Group.where(id: @group.id, public: false).exists? %> 
+<% if GroupUser.where(user_id: current_user.id, group_id: @group.id, membership: "admin").exists? %>
   <% if !@pending.empty? %>
 <div class="panel panel-default">
   <div class="panel-heading"> <h4>Pending Approvals for Group</h4></div>

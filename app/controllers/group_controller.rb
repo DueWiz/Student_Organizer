@@ -72,7 +72,7 @@ class GroupController < ApplicationController
         count = 0
       end
     end
-    @pending = GroupUser.where(membership: "pending")
+    @pending = GroupUser.where(group_id: @group.id, membership: "pending")
     # @pendingUser = Array.new
     # @pending.each do |groupUser|
     #   @pendingUser.push(User.where(id: groupUser.user_id))
