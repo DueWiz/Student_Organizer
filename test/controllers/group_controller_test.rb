@@ -10,7 +10,7 @@ class GroupControllerTest < ActionDispatch::IntegrationTest
 
     test "should get create" do
       assert_difference('Group.count') do
-        post "/group/create", group: {name: 'COSI166B', year: 2016, term: 'Spring', section: 1}
+        post "/group/create", group: {name: 'COSI166B', year: 2016, term: 'Spring', section: 1, public: true}
       end
         assert_redirected_to homework_url
     end
