@@ -28,9 +28,15 @@
                 </div>
                 <div class="col-sm-7 link-to-text-color" style="padding: 4%">
                   <h6>
-                    <p><ins> Name: </ins><br><%= h.name%></p>
+                    <p><ins> Name: </ins><br>
+                      <% if h.name == nil or h.name.length < 13 %>
+                        <%= h.name %>
+                      <% else %>
+                        <%= h.name[0..13]+"..." %>
+                      <% end %>
+                    </p>
                     <p><ins>Class:</ins><br>
-                      <% if not h.group_id.nil? %>
+                      <% if not h.group_id.nil?%>
                          <%= Group.find_by_id(h.group_id).name %>
                       <% end %>
                     </p>
