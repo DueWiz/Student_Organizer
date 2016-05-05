@@ -15,8 +15,8 @@ GroupUser.delete_all
 user = User.create! :email => 'yiran@email.com', :password => '12345678', :password_confirmation => '12345678'
 group1 = Group.create! :name => 'MATH39A', :section => 1, :term =>'Spring', :year => 2016, :public => true
 group2 = Group.create! :name => 'Programming', :section => 1, :term =>'Spring', :year => 2016, :public =>true
-# GroupUser.create(user_id: user[:id], group_id: group1[:id])
-# GroupUser.create(user_id: user[:id], group_id: group2[:id])
+GroupUser.create(user_id: user[:id], group_id: group1[:id])
+GroupUser.create(user_id: user[:id], group_id: group2[:id])
 homework1 = Homework.create(name: 'Problem Set 5', due_date: Time.now.to_datetime,
   description: "Please solve the following problems: P205",
   professor: "Liuba Shrira", group_id: group1.id)
