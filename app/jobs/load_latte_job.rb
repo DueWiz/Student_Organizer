@@ -14,7 +14,12 @@ class LoadLatteJob < ApplicationJob
       group.term = course_term
       group.year = course_year
       group.section = course_section
-      group.save
+      e_group = Group.find_by(name: group.name, term: group.term, year: group.year, section: group.section)
+      if e_group
+          group = e_group
+      else
+          group.save
+      end
       group_user = GroupUser.new
       group_user.user_id = current_user.id
       group_user.group_id = group.id
@@ -24,6 +29,7 @@ class LoadLatteJob < ApplicationJob
 
   def perform(current_user)
     current_user.latte_account.status = false
+    current_user.latte_account.save
     agent = Mechanize.new
     agent.agent.http.verify_mode = OpenSSL::SSL::VERIFY_NONE
     logger.info "Latte Account Name:#{current_user.latte_account.name}"
@@ -97,9 +103,18 @@ class LoadLatteJob < ApplicationJob
             h.due_date = (DateTime.parse(a_due_date.to_s) - (estHoursOffset/24.0)).new_offset(estOffset)
           end
           ActionCable.server.broadcast "latte_info_#{current_user.id}", latte_info: "#{a_due_date}"
+          #before save check duplicate
+          e_h = Homework.find_by(name: h.name, group_id: h.group_id)
+          if e_h
+              e_h.due_date = h.due_date
+              e_h.description = h.description
+              h = e_h
+          end
           h.save
-          u_h.homework_id = h.id
-          u_h.save
+          if e_h == nil
+              u_h.homework_id = h.id
+              u_h.save
+          end
           ActionCable.server.broadcast "latte_info_#{current_user.id}", latte_info: "Finished current assignment page"
         end
       end
@@ -108,5 +123,6 @@ class LoadLatteJob < ApplicationJob
     ActionCable.server.broadcast "latte_info_#{current_user.id}", spin_status: 'inactive'
     ActionCable.server.broadcast "latte_info_#{current_user.id}", bar_status: "Finished"
     current_user.latte_account.status = true
+    current_user.latte_account.save
   end
 end
