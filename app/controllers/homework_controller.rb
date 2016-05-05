@@ -19,8 +19,12 @@ class HomeworkController < ApplicationController
     #   end
     # end
     params[:hw_choice] == "Uncompleted"
-    @my_hw = current_user.homeworks.order(:due_date)
-    @my_hw = @my_hw.where("due_date > ?", DateTime.now)
+    hwstatus = current_user.user_homeworks.where(status: 'No attempt')
+    myhwArray = Array.new
+    hwstatus.each do |h|
+      myhwArray.push(h.homework_id)
+    end
+    @my_hw = current_user.homeworks.where(id: myhwArray).order(:due_date)
     @table = Array.new
     @date_infos = Array.new
     index = 0
@@ -31,7 +35,7 @@ class HomeworkController < ApplicationController
         @date_infos[index] = Array.new
       end
       @table[index] += [hw]
-      @date_infos[index] += [display_date_info(hw)]
+      @date_infos[index] += [display_date_info(hw,'No attempt')]
       count += 1
       if count == 3
         index += 1
@@ -46,9 +50,21 @@ class HomeworkController < ApplicationController
     if params[:hw_choice] == "All"
       @my_hw = current_user.homeworks.order(:due_date)
     elsif params[:hw_choice] == "Uncompleted"
-      @my_hw = @my_hw.where("due_date > ?", DateTime.now)
+      # @my_hw = @my_hw.where("due_date > ?", DateTime.now)
+      hwstatus = current_user.user_homeworks.where(status: 'No attempt')
+      myhwArray = Array.new
+      hwstatus.each do |h|
+        myhwArray.push(h.homework_id)
+      end
+      @my_hw = @my_hw.where(id: myhwArray)
     elsif params[:hw_choice] == "Completed"
-      @my_hw = @my_hw.where("due_date < ?", DateTime.now)
+      # @my_hw = @my_hw.where("due_date < ?", DateTime.now)
+      hwstatus = current_user.user_homeworks.where(status: 'Submitted for grading')
+      myhwArray = Array.new
+      hwstatus.each do |h|
+        myhwArray.push(h.homework_id)
+      end
+      @my_hw = @my_hw.where(id: myhwArray)
     end
     if not params[:search].nil?
       @my_hw = @my_hw.where("name LIKE ?", "%#{params[:search]}%")
@@ -63,7 +79,8 @@ class HomeworkController < ApplicationController
         @date_infos[index] = Array.new
       end
       @table[index] += [hw]
-      @date_infos[index] += [display_date_info(hw)]
+      status = current_user.user_homeworks.find_by_homework_id(hw.id).status
+      @date_infos[index] += [display_date_info(hw,status)]
       count += 1
       if count == 3
         index += 1
@@ -79,6 +96,9 @@ class HomeworkController < ApplicationController
   end
 
   def edit
+    myhw = current_user.user_homeworks.find_by_homework_id(params[:id])
+    myhw.status = params[:homework][:status]
+    myhw.note = params[:homework][:note]
     homework = Homework.find_by_id(params[:id])
     homework.name = params[:homework][:name]
     homework.due_date = Time.zone.local(params[:homework]["due_date(1i)"].to_i,
@@ -92,6 +112,7 @@ class HomeworkController < ApplicationController
       homework.group_id = thisGroup.id
     end
     homework.save!
+    myhw.save!
     redirect_to homeworkshow_path
   end
 
@@ -109,7 +130,7 @@ class HomeworkController < ApplicationController
       @new.group_id = thisGroup.id
     end
     @new.save!
-    UserHomework.create(user_id: current_user.id, homework_id: @new.id, admin: true)
+    UserHomework.create(user_id: current_user.id, homework_id: @new.id, admin: true, status: 'No attempt')
     redirect_to homework_url
   end
 
@@ -117,7 +138,6 @@ class HomeworkController < ApplicationController
     @this_hw = Homework.find_by_id(params[:id])
     @due = time_due(@this_hw.due_date)
     @this_userhw = current_user.user_homeworks.find_by_homework_id(params[:id])
-    @date_info = display_date_info(@this_hw)
     this_group = Group.find_by_id(@this_hw.group_id)
     if this_group != nil
       @groupName = this_group.year.to_s + "-" + this_group.term + "-"+ this_group.name + "-Section " + this_group.section.to_s

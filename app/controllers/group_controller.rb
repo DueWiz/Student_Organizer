@@ -36,10 +36,10 @@ class GroupController < ApplicationController
     @groupUser = GroupUser.where(group_id: params[:id], user_id: params[:user_id])
     if params[:decision] == "true"
       @groupUser.update(membership: "member")
-    else 
-      @groupUser.update(membership: "denied")  
+    else
+      @groupUser.update(membership: "denied")
     end
-    redirect_to groupshow_path(:id => params[:id])  
+    redirect_to groupshow_path(:id => params[:id])
   end
 
   def search
@@ -56,21 +56,9 @@ class GroupController < ApplicationController
       hws = Homework.where('group_id = ?', @group.id).order(:due_date)
     end
     @table = Array.new
-    @date_infos = Array.new
-    index = 0
-    count = 0
     hws.each do |hw|
-      if count == 0
-        @table[index] = Array.new
-        @date_infos[index] = Array.new
-      end
-      @table[index] += [hw]
-      @date_infos[index] += [display_date_info(hw)]
-      count += 1
-      if count == 3
-        index += 1 
-        count = 0
-      end
+      status = current_user.user_homeworks.find_by_homework_id(hw.id).status
+      @table.push([hw,status])
     end
     if params[:id] == "-1"
       @skip = true
@@ -78,7 +66,7 @@ class GroupController < ApplicationController
       @pending = GroupUser.where(group_id: @group.id, membership: "pending") unless params[:id] == "-1"
       @skip = false
     end
-  end 
+  end
 
   def create
     groupCheck = Group.find_by_name_and_year_and_term_and_section(params[:group][:name],params[:group][:year],params[:group][:term],params[:group][:section])
@@ -93,7 +81,7 @@ class GroupController < ApplicationController
   end
 
   def user_not_authorized
-    newGroup = GroupUser.create(user_id: current_user.id, group_id: params[:group_id], membership: "pending") 
+    newGroup = GroupUser.create(user_id: current_user.id, group_id: params[:group_id], membership: "pending")
     redirect_to(request.referrer || root_path)
   end
 end

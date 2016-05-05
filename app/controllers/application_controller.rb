@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
       end
   end
 
-  def display_date_info (hw)
+  def display_date_info (hw,status)
     time_remain = time_due(hw.due_date)
     if time_remain[0] == 0 and time_remain[1]>=0 and time_remain[2]>=0
       if time_remain[1] == 0 # min
@@ -55,8 +55,13 @@ class ApplicationController < ActionController::Base
     else
       if time_remain[0] <= 0  #finish
         num = 0
-        card_class = "success"
-        time_info = "Done"
+        if status == 'No attempt'
+          card_class = "danger"
+          time_info = "Overdue"
+        else
+          card_class = "success"
+          time_info = "Done"
+        end
       else
         num = time_remain[0]
         time_info = "Days"
@@ -66,6 +71,10 @@ class ApplicationController < ActionController::Base
           card_class = "primary"
         end
       end
+    end
+    if status == 'Submitted for grading'
+      card_class = "success"
+      time_info = "Done"
     end
     date_info = [card_class, num, time_info]
   end

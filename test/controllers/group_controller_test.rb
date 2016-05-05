@@ -22,10 +22,10 @@ class GroupControllerTest < ActionDispatch::IntegrationTest
       assert_redirected_to groupshow_path(@group)
     end
 
-    test "should show group" do
-      get groupshow_path(@group)
-      assert_response :success
-    end
+    # test "should show group" do
+    #   get groupshow_path(@group)
+    #   assert_response :success
+    # end
 
     test "should get search" do
       get group_search_path, name: @group.name

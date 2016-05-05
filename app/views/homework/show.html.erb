@@ -3,17 +3,24 @@
 
   <div class="row">
     <div class = "col-sm-4" style = "text-align:center; padding: 2% ">
-      <% if @due[0] >= 0 && @due[1] >= 0 && @due[2] >= 0 %>
-        <h1 style= "font-size: 600%;"> <%= @due[2]%> </h1>
-        <h4 style= ""> minutes </h4>
-        <h1 style= "font-size: 400%; "> <%= @due[1]%> </h1>
-        <h4 style= ""> hours </h4>
-        <h1 style= "font-size: 200%;"> <%= @due[0]%> </h1>
-        <h4 style= > days </h4>
+      <% if @this_userhw.status == 'No attempt'%>
+        <% if @due[0] >= 0 && @due[1] >= 0 && @due[2] >= 0 %>
+          <h1 style= "font-size: 600%;"> <%= @due[2]%> </h1>
+          <h4 style= ""> minutes </h4>
+          <h1 style= "font-size: 400%; "> <%= @due[1]%> </h1>
+          <h4 style= ""> hours </h4>
+          <h1 style= "font-size: 200%;"> <%= @due[0]%> </h1>
+          <h4 style= > days </h4>
+        <% else %>
+          <h1 style= "">Past</h1>
+          <h1 style= "">Due</h1>
+          <h1 style= >Date</h1>
+        <% end %>
       <% else %>
-        <h1 style= "">Past</h1>
-        <h1 style= "">Due</h1>
-        <h1 style= >Date</h1>
+          <br/>
+          <br/>
+          <br/>
+          <h1 style= "">Done</h1>
       <% end %>
 
       <br>
@@ -35,23 +42,20 @@
         <strong>Due Date: </strong> <%= @this_hw.due_date.to_formatted_s(:rfc822)[0...-6]  %>
       </div>
 
-      <% if @due[0] >= 0 && @due[1] >= 0 && @due[2] >= 0 %>
-        <div class="alert alert-success" role="alert" style = "padding: 1%; background-color: white; color: black; border-color: black">
-          <strong>Time Left: </strong> <%= @due[0] %> days, <%= @due[1] %> hours, <%= @due[2]%> minutes left.
-        </div>
-      <% else %>
-        <div class="alert alert-danger" role="alert">
-          <strong>Warning!</strong> Your assignment is already past due by <%= -(@due[0]+1) %> days, <%= @due[1] %> hours, <%= @due[2]%> minutes.
-        </div>
+      <% if @this_userhw.status == 'No attempt' %>
+        <% if @due[0] >= 0 && @due[1] >= 0 && @due[2] >= 0 %>
+          <div class="alert alert-success" role="alert" style = "padding: 1%; background-color: white; color: black; border-color: black">
+            <strong>Time Left: </strong> <%= @due[0] %> days, <%= @due[1] %> hours, <%= @due[2]%> minutes left.
+          </div>
+        <% else %>
+          <div class="alert alert-danger" role="alert">
+            <strong>Warning!</strong> Your assignment is already past due by <%= -(@due[0]+1) %> days, <%= @due[1] %> hours, <%= @due[2]%> minutes.
+          </div>
+        <% end %>
       <% end %>
 
       <div class="alert alert-success" role="alert" style = "padding: 1%; background-color: white; color: black; border-color: black">
-        <strong>Status: </strong>
-        <% if @this_userhw.status == nil %>
-            No submission yet.
-        <% else %>
-            <%= @this_userhw.status%>
-        <% end %>
+        <strong>Status: </strong><%= @this_userhw.status %>
       </div>
 
       <div class="alert alert-success" role="alert" style = "padding: 1%; background-color: white; color: black; border-color: black">
