@@ -38,7 +38,7 @@
                       <% end %>
                     </p>
                     <% if h.group_id.nil? %>
-                        <p><ins>My Own Homeworks</ins><br>
+                        <p><ins>Personal Assignments</ins><br>
                     <% else %>
                         <% if Group.find_by_id(h.group_id).public %>
                             <p><ins>Class:</ins><br>

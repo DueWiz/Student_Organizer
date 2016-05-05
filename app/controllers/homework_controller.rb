@@ -150,7 +150,7 @@ class HomeworkController < ApplicationController
     if this_group != nil
       @groupName = this_group.year.to_s + "-" + this_group.term + "-"+ this_group.name + "-Section " + this_group.section.to_s
     else
-      @groupName = "My Own Homeworks"
+      @groupName = "Personal Assignments"
     end
 
   end
