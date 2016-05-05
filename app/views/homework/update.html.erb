@@ -4,11 +4,9 @@
 <%= bootstrap_form_for @homework, url: homeworkedit_path(@homework), method: :get, class:"form-group" do |f| %>
   <%= f.text_field :name, autofocus: true %>
   <%= f.datetime_select :due_date, :minute_step => 1%>
-  <label>Class</label>
-  <%= select_tag "group", options_from_collection_for_select(user_groups, "id", "name"), class: "form-control", :prompt => "If this homework doesn't belong to any class, choose me." %>
   <%= f.form_group :status, label: { text: "Status" } do %>
-    <%= f.radio_button :status, 'No attempt', label: "No attempt", checked: true %>
-    <%= f.radio_button :status, 'Submitted for grading', label: "Submitted for grading", checked: false %>
+    <%= f.radio_button :status, 'No attempt', label: "Not Done Yet", checked: true %>
+    <%= f.radio_button :status, 'Submitted for grading', label: "Done", checked: false %>
   <% end %>
   <%= f.text_area :description, rows: '5' %>
   <%= link_to 'Cancel', homeworkshow_path(@homework), class: "btn btn-info", style: "background-color: #2c3e50" %>

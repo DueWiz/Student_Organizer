@@ -37,10 +37,16 @@
                         <%= h.name[0..13]+"..." %>
                       <% end %>
                     </p>
-                    <p><ins>Class:</ins><br>
-                      <% if not h.group_id.nil?%>
-                         <%= Group.find_by_id(h.group_id).name %>
-                      <% end %>
+                    <% if h.group_id.nil? %>
+                        <p><ins>My Own Homeworks</ins><br>
+                    <% else %>
+                        <% if Group.find_by_id(h.group_id).public %>
+                            <p><ins>Class:</ins><br>
+                        <% else %>
+                            <p><ins>Project:</ins><br>
+                        <% end %>
+                        <%= Group.find_by_id(h.group_id).name %>
+                    <% end %>
                     </p>
                     <p>
                     <ins>Description:</ins><br>

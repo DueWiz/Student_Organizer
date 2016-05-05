@@ -8,7 +8,7 @@
 
     <% if user_signed_in? %>
     <form class="navbar-form col-xs-4">
-      <button type="button" class= "btn btn-sm btn-success float-shadow"  data-toggle="modal" data-target="#myModal" style = "background-color: #18bc9c">New Homework</button>
+      <button type="button" class= "btn btn-sm btn-success float-shadow"  data-toggle="modal" data-target="#myModal" style = "background-color: #18bc9c">New Assignment</button>
       <button type="button" class= "btn btn-sm btn-success float-shadow"  id="latte_btn" data-toggle="modal" data-target="#latteModal" style = "background-color: #18bc9c">Latte Settings</button>
       <button type = "button" class= "btn btn-sm btn-success float-shadow" style = "background-color: #18bc9c"><%= link_to 'Calendar', calendar_index_path, class: 'link-to-text-color' %></button>
     </form>
@@ -17,6 +17,11 @@
 
     <div class="pull-xs-right">
       <% if user_signed_in? %>
+
+      <div class="col-xs-6 link-to-text-color">
+        <%= current_user.email %>
+      </div>
+
       <div class="col-xs-1">
         <%= link_to edit_user_registration_path do %>
           <i class="fa fa-cog" style="color:white"></i>
