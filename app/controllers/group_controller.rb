@@ -27,7 +27,7 @@ class GroupController < ApplicationController
       authorize @group
       newGroup = GroupUser.create(user_id: current_user.id, group_id: params[:group_id], membership: "member")
       Homework.where(group_id: params[:group_id]).find_each do |hw|
-        UserHomework.create(user_id: current_user.id, homework_id: hw.id, admin: true)
+        UserHomework.create(user_id: current_user.id, homework_id: hw.id, admin: true, status: 'No attempt')
       end
       redirect_to groupshow_path(@group.id)
   end
@@ -36,6 +36,9 @@ class GroupController < ApplicationController
     @groupUser = GroupUser.where(group_id: params[:id], user_id: params[:user_id])
     if params[:decision] == "true"
       @groupUser.update(membership: "member")
+      Homework.where(group_id: params[:id]).find_each do |hw|
+        UserHomework.create(user_id: params[:user_id], homework_id: hw.id, admin: true, status: 'No attempt')
+      end
     else
       @groupUser.update(membership: "denied")
     end

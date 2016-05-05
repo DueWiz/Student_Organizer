@@ -13,17 +13,12 @@ LatteAccount.delete_all
 GroupUser.delete_all
 
 user = User.create! :email => 'yiran@email.com', :password => '12345678', :password_confirmation => '12345678'
-group1 = Group.create! :name => 'Operating System', :section => 2, :term =>'Spring', :year => 2016, :public => true
+group1 = Group.create! :name => 'MATH39A', :section => 1, :term =>'Spring', :year => 2016, :public => true
 group2 = Group.create! :name => 'Programming', :section => 1, :term =>'Spring', :year => 2016, :public =>true
-GroupUser.create(user_id: user[:id], group_id: group1[:id])
-GroupUser.create(user_id: user[:id], group_id: group2[:id])
-homework1 = Homework.create(name: 'Problem Set 5: File Systems and Trasactions', due_date: Time.now.to_datetime,
-  description: "Please solve the following problems from S&G 7th edition with Java:
-Chapter 10, Problems 2,6
-Chapter 11: Problems 3(a,b), 4, 10
-Chapter 21: Please read sections 21.7.1-3 from Linux Case study.
-Explain briefly why a journalling file system that logs file metadata
-can improve overall file system performance, compared to a file system without a log (in addition to shortening recovery time).",
+# GroupUser.create(user_id: user[:id], group_id: group1[:id])
+# GroupUser.create(user_id: user[:id], group_id: group2[:id])
+homework1 = Homework.create(name: 'Problem Set 5', due_date: Time.now.to_datetime,
+  description: "Please solve the following problems: P205",
   professor: "Liuba Shrira", group_id: group1.id)
 homework2 = Homework.create(name: 'Quiz 3 Topics', due_date: Time.now.to_datetime,
     description: "A. Memory Management Chapters 8, and Chapter 9 (sec 1-6) and 9.10
