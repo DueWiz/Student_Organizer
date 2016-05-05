@@ -6,6 +6,7 @@ class LatteController < ApplicationController
         @latte.password = params["latte_account"]["password"]
         logger.info "Post password::: #{params['latte_account']['password']}"
         @latte.user_id = params["user_id"]
+        @latte.status = false
         respond_to do |format|
             if @latte.save
                 format.html { redirect_to latte_info_path, task: 'refresh_latte' }
