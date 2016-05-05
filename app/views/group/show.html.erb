@@ -1,3 +1,47 @@
+<% if @skip == true %>
+<!--     do nothing -->
+<% else %>
+  <% if GroupUser.where(user_id: current_user.id, group_id: @group.id, membership: "admin").exists? %>
+    <% if !@pending.empty? %>
+        <br />
+        <div class="alert alert-warning alert-dismissible fade in" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+          <div class="panel panel-default">
+            <div class="panel-heading"> <h4>Pending Approvals for Group</h4></div>
+      <table class="table", style="border-collapse: separate; border-spacing: 5px 1px;">
+        <thead>
+          <tr>
+            <th>User Email</th>
+            <th>Accept/Reject</th>
+          </tr>
+        </thead>
+      <% @pending.each do |individual| %>
+        <tbody>
+          <tr>
+            <td><%= individual.user.email %></td>
+            <td><%= link_to 'Accept', {:controller => "group", 
+                                       :action => "decision", 
+                                       :id => individual.group_id, 
+                                       :user_id => individual.user.id,
+                                       :decision => "true"}, method: 'post', class: "btn btn-sm btn-success" %>
+                <%= link_to 'Reject', {:controller => "group", 
+                                       :action => "decision", 
+                                       :id => individual.group_id, 
+                                       :user_id => individual.user.id,
+                                       :decision => "false"}, method: 'post', class: "btn btn-sm btn-danger" %>
+                                      </td>
+          </tr>
+        </tbody>
+      <% end %>
+      </table>
+    </div>
+      </div>
+  </div>
+    <% end %>
+  <% end %>
+<% end %>
 <br>
     <% if not @group.nil? %>
         <h2><%= @group.year.to_s + "-" + @group.term + "-"+ @group.name + "-Section " + @group.section.to_s%>

@@ -1,16 +1,13 @@
 class GroupController < ApplicationController
   before_action :authenticate_user!
   def index
-    @my_groups = current_user.groups
+
   end
 
   def new
   end
 
   def edit
-  end
-
-  def create
   end
 
   def update
@@ -26,11 +23,23 @@ class GroupController < ApplicationController
   end
 
   def join
-      newGroup = GroupUser.create(user_id: current_user.id, group_id: params[:group_id])
+      @group = Group.find(params[:group_id])
+      authorize @group
+      newGroup = GroupUser.create(user_id: current_user.id, group_id: params[:group_id], membership: "member")
       Homework.where(group_id: params[:group_id]).find_each do |hw|
         UserHomework.create(user_id: current_user.id, homework_id: hw.id, admin: true)
       end
-      redirect_to groupshow_path(params[:group_id])
+      redirect_to groupshow_path(@group.id)
+  end
+
+  def decision
+    @groupUser = GroupUser.where(group_id: params[:id], user_id: params[:user_id])
+    if params[:decision] == "true"
+      @groupUser.update(membership: "member")
+    else 
+      @groupUser.update(membership: "denied")  
+    end
+    redirect_to groupshow_path(:id => params[:id])  
   end
 
   def search
@@ -59,22 +68,32 @@ class GroupController < ApplicationController
       @date_infos[index] += [display_date_info(hw)]
       count += 1
       if count == 3
-        index += 1
+        index += 1 
         count = 0
       end
     end
-  end
+    if params[:id] == "-1"
+      @skip = true
+    else
+      @pending = GroupUser.where(group_id: @group.id, membership: "pending") unless params[:id] == "-1"
+      @skip = false
+    end
+  end 
 
   def create
     groupCheck = Group.find_by_name_and_year_and_term_and_section(params[:group][:name],params[:group][:year],params[:group][:term],params[:group][:section])
     if groupCheck == nil
-      @new = Group.create(name: params[:group][:name].upcase, year: params[:group][:year], term: params[:group][:term], section: params[:group][:section])
+      @new = Group.create(name: params[:group][:name].upcase, year: params[:group][:year], term: params[:group][:term], section: params[:group][:section], public: params[:group][:public])
       @new.save!
-      GroupUser.create(user_id: current_user.id, group_id: @new.id)
+      GroupUser.create(user_id: current_user.id, group_id: @new.id, membership: "admin")
       redirect_to homework_url
     else
       @groupName = params[:group][:name]
     end
   end
 
+  def user_not_authorized
+    newGroup = GroupUser.create(user_id: current_user.id, group_id: params[:group_id], membership: "pending") 
+    redirect_to(request.referrer || root_path)
+  end
 end

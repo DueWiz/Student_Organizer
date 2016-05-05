@@ -19,14 +19,25 @@
         <td><%= r.term %></td>
         <td><%= r.section %></td>
         <% if @relation.find_by_user_id_and_group_id(current_user.id,r.id)%>
+          <% if @relation.find_by_user_id_and_group_id(current_user.id,r.id).membership == "pending" || @relation.find_by_user_id_and_group_id(current_user.id,r.id).membership == "denied"%>
+            <td>Request Pending</td>
+          <% else %>
           <td><%= link_to 'Already In', {:controller => "group",
                                          :action => "show",
                                          :id => r.id}, method: 'get', class: "btn btn-primary btn-sm" %></td>
+          <% end %>
         <% else %>
+          <% if r.public? %>
           <td><%= link_to 'Join Now', {:controller => "group",
                                        :action => "join",
                                        :group_id => r.id},
                                        :method => "post", class: "btn btn-info btn-sm", style: "background-color: #18bc9c"%></td>
+          <% else %>
+          <td><%= link_to 'Request Membership', {:controller => "group",
+                                       :action => "join",
+                                       :group_id => r.id},
+                                       :method => "post", class: "btn btn-info btn-sm", style: "background-color: #18bc9c"%></td> 
+          <% end %>
         <% end %>
       </tr>
    <% end %>

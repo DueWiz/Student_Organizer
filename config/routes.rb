@@ -25,11 +25,13 @@ Rails.application.routes.draw do
   controller :group do
     post 'group/create' => :create
     post 'group/join' => :join
+    post 'group/decision' => :decision
     post 'group/destroy' => :destroy
   end
   get 'group/create'
   get 'group/update'
   get 'group/join'
+  get 'group/decision'
 
   get 'group/destroy'
 
