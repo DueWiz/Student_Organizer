@@ -137,17 +137,31 @@ class HomeworkController < ApplicationController
   def show
     @this_hw = Homework.find_by_id(params[:id])
     @due = time_due(@this_hw.due_date)
+    if Group.find_by_id(@this_hw.group_id) == nil
+      @private = 'myself'
+    elsif Group.find_by_id(@this_hw.group_id).public
+      @private = 'class'
+    else
+      @private = 'project'
+    end
     @this_userhw = current_user.user_homeworks.find_by_homework_id(params[:id])
     this_group = Group.find_by_id(@this_hw.group_id)
+
     if this_group != nil
       @groupName = this_group.year.to_s + "-" + this_group.term + "-"+ this_group.name + "-Section " + this_group.section.to_s
     else
       @groupName = "My Own Homeworks"
     end
+
   end
 
   def update
     @homework = Homework.find_by_id(params[:id])
+    if @homework.group_id != nil && !Group.find_by_id(@homework.group_id).public
+      @private = true
+    else
+      @private = false
+    end
   end
 
   def destroy

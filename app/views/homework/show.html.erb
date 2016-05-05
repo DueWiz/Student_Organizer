@@ -35,7 +35,13 @@
       </div>
 
       <div class="alert alert-success" role="alert" style = "padding: 1%; background-color: white; color: black; border-color: black">
-        <strong>Class: </strong> <%= @groupName %>
+        <% if @private == 'myself'%>
+          <strong><%= @groupName %></strong>
+        <% elsif @private == 'class' %>
+          <strong>Class: </strong> <%= @groupName %>
+        <% else %>
+          <strong>Project: </strong> <%= @groupName %>
+        <% end %>
       </div>
 
       <div class="alert alert-success" role="alert" style = "padding: 1%; background-color: white; color: black; border-color: black">
@@ -59,9 +65,15 @@
       </div>
 
       <div class="alert alert-success" role="alert" style = "padding: 1%; background-color: white; color: black; border-color: black">
-        <strong>Description: </strong> <%= @this_hw.description %>
+        <strong>Description: </strong>
+        <% if @this_hw.description == "" %>
+          No description.
+        <% else %>
+          <%= @this_hw.description%>
+        <% end %>
       </div>
 
+      <% if @private == 'class'%>
       <div class="alert alert-success" role="alert" style = "padding: 1%; background-color: white; color: black; border-color: black">
         <strong>Comment: </strong>
         <% if @this_userhw.comment == nil %>
@@ -70,6 +82,7 @@
           <%= @this_userhw.comment%>
         <% end %>
       </div>
+      <% end %>
 
   </div>
 

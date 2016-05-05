@@ -4,7 +4,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">New Group</h4>
+        <h4 class="modal-title" id="myModalLabel">New Class/Project</h4>
       </div>
       <div class="modal-body">
         <%= bootstrap_form_for(:group, url: group_create_path, method: :post) do |f| %>
@@ -13,12 +13,12 @@
             <%= f.radio_button :year, 2016, label: "2016", checked: true %>
             <%= f.radio_button :year, 2017, label: "2017" %>
           <% end %>
-          <%= f.form_group :public, label: { text: "Public/Private" } do %>
-            <%= f.radio_button :public, true, label: "Public", checked: true %>
-            <%= f.radio_button :public, false, label: "Private" %>  
-          <% end %>                   
+          <%= f.form_group :public, label: { text: "Class/Project" } do %>
+            <%= f.radio_button :public, true, label: "Class", checked: true %>
+            <%= f.radio_button :public, false, label: "Project" %>
+          <% end %>
           <%= f.collection_select(:term, Group::TERMS, :to_s, lambda{|i| i.to_s.humanize})%>
-          <%= f.number_field :section, :min => 1, :max => 10, placeholder: "Must be an integer between 1 and 10", :required => 'required'%>
+          <%= f.number_field :section, :min => 1, :max => 10, placeholder: "Optional for projects"%>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
             <%= f.submit "Submit", class: "btn btn-primary"%>

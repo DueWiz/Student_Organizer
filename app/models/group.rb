@@ -3,7 +3,6 @@ class Group < ApplicationRecord
   validates :name, presence: true
   validates :year, presence: true
   validates :term, presence: true
-  validates :section, presence: true
 
   has_many :homeworks
   has_many :group_users

@@ -3,7 +3,7 @@
 
   <% homeworks.each do |homework| %>
     <div>
-      <%= homework.name %>
+      <%= link_to homework.name, homeworkshow_path(homework) %>
     </div>
   <% end %>
-<% end %>   
+<% end %>

@@ -21,14 +21,14 @@
         <tbody>
           <tr>
             <td><%= individual.user.email %></td>
-            <td><%= link_to 'Accept', {:controller => "group", 
-                                       :action => "decision", 
-                                       :id => individual.group_id, 
+            <td><%= link_to 'Accept', {:controller => "group",
+                                       :action => "decision",
+                                       :id => individual.group_id,
                                        :user_id => individual.user.id,
                                        :decision => "true"}, method: 'post', class: "btn btn-sm btn-success" %>
-                <%= link_to 'Reject', {:controller => "group", 
-                                       :action => "decision", 
-                                       :id => individual.group_id, 
+                <%= link_to 'Reject', {:controller => "group",
+                                       :action => "decision",
+                                       :id => individual.group_id,
                                        :user_id => individual.user.id,
                                        :decision => "false"}, method: 'post', class: "btn btn-sm btn-danger" %>
                                       </td>
@@ -44,19 +44,31 @@
 <% end %>
 <br>
 <% if not @group.nil? %>
-    <h2><%= @group.year.to_s + "-" + @group.term + "-"+ @group.name + "-Section " + @group.section.to_s%>
-    <td><%= link_to 'Quit the group', {:controller => "group",
+    <h1><%= @group.year.to_s + "-" + @group.term + "-"+ @group.name + "-Section " + @group.section.to_s%>
+    <% if @group.public %>
+      <td><%= link_to 'Quit the class', {:controller => "group",
                                       :action => "destroy",
                                       :id => @group.id}, method: 'post', class: "btn btn-primary btn-sm",
-                                      data: {confirm: 'Doing so will delete every homework you have under this group. Are you sure?'} %></td></h2>
+                                      data: {confirm: 'Doing so will delete every homework you have in this class. Are you sure?'} %></td></h1>
+    <% else %>
+      <td><%= link_to 'Drop the project', {:controller => "group",
+                                    :action => "destroy",
+                                    :id => @group.id}, method: 'post', class: "btn btn-primary btn-sm",
+                                    data: {confirm: 'Doing so will delete every assignment you have under this project. Are you sure?'} %></td></h1>
+    <% end %>
 <% else %>
     <h2>My Own Homeworks</h2>
 <% end %>
 
+
 <table class="table", style="border-collapse: separate; border-spacing: 20px 1px;">
     <thead>
       <tr>
-        <th>Homework Name</th>
+        <% if @group == nil || @group.public %>
+          <th>Homework Name</th>
+        <% else %>
+          <th>Project Division</th>
+        <% end %>
         <th>Due Date</th>
         <th>Your Status</th>
         <th>Go Checking</th>
@@ -67,8 +79,12 @@
       <% @table.each do |t| %>
         <tr>
           <td><%= t[0].name %></td>
-          <td><%= t[0].due_date %></td>
-          <td><%= t[1] %></td>
+          <td><%= t[0].due_date.to_formatted_s(:rfc822)[0...-6] %></td>
+          <td><% if t[1] == 'No attempt'%>
+                  Not Done Yet
+              <% else %>
+                  Done
+              <% end %></td>
           <td><%= link_to 'Details', {:controller => "homework",
                                            :action => "show",
                                            :id => t[0].id}, method: 'get', class: "btn btn-primary btn-sm" %></td>
