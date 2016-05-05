@@ -106,5 +106,6 @@ class LoadLatteJob < ApplicationJob
     ActionCable.server.broadcast "latte_info_#{current_user.id}", latte_info: '<br/><a href="/">Back</a>'
     ActionCable.server.broadcast "latte_info_#{current_user.id}", spin_status: 'inactive'
     ActionCable.server.broadcast "latte_info_#{current_user.id}", bar_status: "Finished"
+    session[:latte_status] = "ready"
   end
 end
