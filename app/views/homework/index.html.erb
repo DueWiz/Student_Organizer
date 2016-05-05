@@ -26,7 +26,7 @@
         <% if current_user.latte_account == nil %>
           Reminder: you haven't subscribed Latte and you can do it anytime through the button on the top.
         <% else %>
-            <% if !current_user.latte_account  %>
+            <% if !current_user.latte_account.status  %>
             Your Latte data is now loading...
             <% else %>
             Latte data loading is finished!
