@@ -14,7 +14,12 @@ class LoadLatteJob < ApplicationJob
       group.term = course_term
       group.year = course_year
       group.section = course_section
-      group.save
+      e_group = Group.find_by(name: group.name, term: group.term, year: group.year, section: group.section)
+      if e_group
+          group = e_group
+      else
+          group.save
+      end
       group_user = GroupUser.new
       group_user.user_id = current_user.id
       group_user.group_id = group.id
@@ -98,9 +103,18 @@ class LoadLatteJob < ApplicationJob
             h.due_date = (DateTime.parse(a_due_date.to_s) - (estHoursOffset/24.0)).new_offset(estOffset)
           end
           ActionCable.server.broadcast "latte_info_#{current_user.id}", latte_info: "#{a_due_date}"
+          #before save check duplicate
+          e_h = Homework.find_by(name: h.name, group_id: h.group_id)
+          if e_h
+              e_h.due_date = h.due_date
+              e_h.description = h.description
+              h = e_h
+          end
           h.save
-          u_h.homework_id = h.id
-          u_h.save
+          if e_h == nil
+              u_h.homework_id = h.id
+              u_h.save
+          end
           ActionCable.server.broadcast "latte_info_#{current_user.id}", latte_info: "Finished current assignment page"
         end
       end
