@@ -14,7 +14,7 @@ GroupUser.delete_all
 
 user = User.create! :email => 'yiran@email.com', :password => '12345678', :password_confirmation => '12345678'
 group1 = Group.create! :name => 'Operating System', :section => 2, :term =>'Spring', :year => 2016, :public => true
-group2 = Group.create! :name => 'Programming Intro', :section => 1, :term =>'Spring', :year => 2016, :public =>true
+group2 = Group.create! :name => 'Programming', :section => 1, :term =>'Spring', :year => 2016, :public =>true
 GroupUser.create(user_id: user[:id], group_id: group1[:id])
 GroupUser.create(user_id: user[:id], group_id: group2[:id])
 homework1 = Homework.create(name: 'Problem Set 5: File Systems and Trasactions', due_date: Time.now.to_datetime,
@@ -39,7 +39,7 @@ Address translation and memory allocation
 UserHomework.create(status: "No attempt", grade: 0, comment: "Please finish this homework", user_id: user[:id],
   homework_id: homework1[:id], note: "try to finish this homework ealier")
 UserHomework.create(status: "No attempt", grade: 0, comment: "review for the quiz", user_id: user[:id],
-    homework_id: homework1[:id], note: "find some time go through the list")
+    homework_id: homework2[:id], note: "find some time go through the list")
 
 homework3 = Homework.create(name: 'HW10', due_date: Time.now.to_datetime,
         description: "Complete the End of Unit 4 Student Survey to self-assess your learning in this unit and our pedagogical offerings
