@@ -38,11 +38,14 @@
       </table>
     </div>
       </div>
-  </div>
     <% end %>
   <% end %>
 <% end %>
 <br>
+
+<% if @skip == true%>
+<div class="col-sm-9">
+<% end %>
 <% if not @group.nil? %>
     <h1><%= @group.year.to_s + "-" + @group.term + "-"+ @group.name + "-Section " + @group.section.to_s%>
     <% if @group.public %>
@@ -92,3 +95,6 @@
      <% end %>
     </tbody>
 </table>
+<% if @skip == true %>
+</div>
+<% end %>
