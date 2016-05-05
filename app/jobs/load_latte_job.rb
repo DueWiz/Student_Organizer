@@ -111,10 +111,9 @@ class LoadLatteJob < ApplicationJob
               h = e_h
           end
           h.save
-          if e_h == nil
-              u_h.homework_id = h.id
-              u_h.save
-          end
+          u_h.homework_id = h.id
+          u_h.admin = true
+          u_h.save
           ActionCable.server.broadcast "latte_info_#{current_user.id}", latte_info: "Finished current assignment page"
         end
       end

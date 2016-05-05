@@ -88,7 +88,15 @@
         <% end %>
       </div>
       <% end %>
-      <button type = "button" class= "btn btn-sm btn-success" style = "background-color: #18bc9c"><%= link_to 'Back', root_path, class: 'link-to-text-color' %></button>
+      <button type = "button" class= "btn btn-sm btn-success" style = "background-color: #18bc9c"><%= link_to 'Back to All Assignments', root_path, class: 'link-to-text-color' %></button>
+      <button type = "button" class= "btn btn-sm btn-success" style = "background-color: #18bc9c">
+        <% if @private == 'myself'%>
+          <%= link_to 'Back to Personal Assignments', groupshow_path(-1), class: 'link-to-text-color' %></button>
+        <% elsif @private == 'class'%>
+          <%= link_to 'Back to Class', groupshow_path(id: @this_hw.group_id), class: 'link-to-text-color' %></button>
+        <% else %>
+          <%= link_to 'Back to Project', groupshow_path(id: @this_hw.group_id), class: 'link-to-text-color' %></button>
+        <% end %>
   </div>
 
     </div>
