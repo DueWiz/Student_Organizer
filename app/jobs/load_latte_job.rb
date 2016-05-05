@@ -23,7 +23,7 @@ class LoadLatteJob < ApplicationJob
   end
 
   def perform(current_user)
-    session.delete(:latte_status) if session[:latte_status]
+    #session.delete(:latte_status) if session[:latte_status]
     agent = Mechanize.new
     agent.agent.http.verify_mode = OpenSSL::SSL::VERIFY_NONE
     logger.info "Latte Account Name:#{current_user.latte_account.name}"
