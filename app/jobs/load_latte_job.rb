@@ -23,7 +23,7 @@ class LoadLatteJob < ApplicationJob
   end
 
   def perform(current_user)
-    #session.delete(:latte_status) if session[:latte_status]
+    current_user.latte_account.status = false
     agent = Mechanize.new
     agent.agent.http.verify_mode = OpenSSL::SSL::VERIFY_NONE
     logger.info "Latte Account Name:#{current_user.latte_account.name}"
@@ -107,6 +107,6 @@ class LoadLatteJob < ApplicationJob
     ActionCable.server.broadcast "latte_info_#{current_user.id}", latte_info: '<br/><a href="/">Back</a>'
     ActionCable.server.broadcast "latte_info_#{current_user.id}", spin_status: 'inactive'
     ActionCable.server.broadcast "latte_info_#{current_user.id}", bar_status: "Finished"
-    session[:latte_status] = "ready"
+    current_user.latte_account.status = true
   end
 end
