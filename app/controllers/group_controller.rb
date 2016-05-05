@@ -47,21 +47,9 @@ class GroupController < ApplicationController
       hws = Homework.where('group_id = ?', @group.id).order(:due_date)
     end
     @table = Array.new
-    @date_infos = Array.new
-    index = 0
-    count = 0
     hws.each do |hw|
-      if count == 0
-        @table[index] = Array.new
-        @date_infos[index] = Array.new
-      end
-      @table[index] += [hw]
-      @date_infos[index] += [display_date_info(hw)]
-      count += 1
-      if count == 3
-        index += 1
-        count = 0
-      end
+      status = current_user.user_homeworks.find_by_homework_id(hw.id).status
+      @table.push([hw,status])
     end
   end
 

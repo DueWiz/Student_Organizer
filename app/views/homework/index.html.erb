@@ -9,7 +9,7 @@
       <%= label_tag(:completed, "Completed") %>
       <%= radio_button_tag(:hw_choice, "Uncompleted",true, onclick: "$('#special').submit();")%>
       <%= label_tag(:completed, "Uncompleted") %>
-  </div>
+    </div>
     <div class="input-group input-group-sm col-xs-4">
       <%= text_field_tag :search, params[:search], onchange: "$('#special').submit();", class: "form-control input-xs", placeholder: "Search Homework..." %>
       <div class="input-group-addon" style="height:20px; padding:0px">

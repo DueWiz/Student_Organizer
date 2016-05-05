@@ -21,7 +21,9 @@
           <div class="card-deck">
               <!-- <blockquote class="card-blockquote "> -->
                 <div class="col-sm-5 link-to-text-color" style="text-align: center; padding: 20px">
-                  <h1> <%= @date_infos[i][j][1].to_s %></h1>
+                  <% if @date_infos[i][j][2] != 'Done' && @date_infos[i][j][2] != 'Overdue'%>
+                    <h1> <%= @date_infos[i][j][1].to_s %></h1>
+                  <% end %>
                   <div style="padding: 0px; margin: 0px;">
                   <h4 > <%= @date_infos[i][j][2]%></h4>
                   </div>
