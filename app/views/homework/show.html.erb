@@ -61,7 +61,12 @@
       <% end %>
 
       <div class="alert alert-success" role="alert" style = "padding: 1%; background-color: white; color: black; border-color: black">
-        <strong>Status: </strong><%= @this_userhw.status %>
+        <strong>Status: </strong>
+        <% if @this_userhw.status == "Submitted for grading" %>
+          Done.
+        <% else %>
+          Not Done Yet.
+        <% end %>
       </div>
 
       <div class="alert alert-success" role="alert" style = "padding: 1%; background-color: white; color: black; border-color: black">
